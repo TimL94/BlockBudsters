@@ -1,0 +1,9 @@
+<svg width="500" height="500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#4B0082" stroke="black" stroke-width="5" />
+  
+  <!-- Text -->
+  <text x="100" y="110" font-size="113" font-family="Arial" fill="white" text-anchor="middle" alignment-baseline="middle">
+    603
+  </text>
+</svg>
