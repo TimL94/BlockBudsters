@@ -1,30 +1,44 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { Link } from '@mui/material';
-import NightlifeIcon from '@mui/icons-material/Nightlife';
-import SettingsIcon from '@mui/icons-material/Settings';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  Link,
+  Drawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText
+} from '@mui/material';
+import {
+  Menu as MenuIcon,
+  Nightlife as NightlifeIcon,
+  Settings as SettingsIcon,
+  MoveToInbox as InboxIcon,
+  Mail as MailIcon,
+  RestaurantMenu as RestarauntMenuIcon,
+  Event as EventIcon,
+  LocalPizza as PizzaIcon,
+  EditCalendar as BookingIcon,
+  ContactPhone as ContactIcon
+} from '@mui/icons-material';
 
 const pages = ['Events', 'Menu'];
 const settings = ['Account', 'Logout'];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -36,6 +50,89 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton >
+            <ListItemIcon>
+              <EventIcon />
+            </ListItemIcon>
+            <ListItemText>
+              <Link href='/Events' sx={{textDecoration:'none', color:'inherit'}}>
+                Events
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <RestarauntMenuIcon />
+            </ListItemIcon>
+            <ListItemText>
+            <Link href='/Menu' sx={{textDecoration:'none', color:'inherit'}}>
+                Menu
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+
+      <Divider />
+
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton >
+            <ListItemIcon>
+              <PizzaIcon />
+            </ListItemIcon>
+            <ListItemText>
+              <Link href='/Order' sx={{textDecoration:'none', color:'inherit'}}>
+                Order Online
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <BookingIcon />
+            </ListItemIcon>
+            <ListItemText>
+            <Link href='/Booking' sx={{textDecoration:'none', color:'inherit'}}>
+                Booking
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+      
+      <Divider />
+      
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <ContactIcon />
+            </ListItemIcon>
+            <ListItemText>
+            <Link href='/Contact' sx={{textDecoration:'none', color:'inherit'}}>
+                Contact
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
@@ -62,44 +159,12 @@ function ResponsiveAppBar() {
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
+              <Button onClick={toggleDrawer(true)} color='inherit'>
                 <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <Link href={`/${page}`} sx={{ textDecoration: 'none', color: 'inherit' }}>
-                        {page}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+              </Button>
+              <Drawer open={open} onClose={toggleDrawer(false)}>
+                {DrawerList}
+              </Drawer>
             </Box>
             <NightlifeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
