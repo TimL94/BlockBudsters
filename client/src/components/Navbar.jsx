@@ -39,7 +39,7 @@ function ResponsiveAppBar() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto'}}>
+      <AppBar position="fixed" sx={{ maxWidth: { mb: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto'}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <NightlifeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
