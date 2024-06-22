@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 
 
-function Booking() {
+function Login() {
     return(
         <Container
             sx={{
@@ -11,9 +11,9 @@ function Booking() {
                 alignItems: 'center'
             }}
         >
-            <h1>Booking</h1>
+            <h1>Login</h1>
         </Container>
     )
 }
 
-export default Booking;
+export default Login;

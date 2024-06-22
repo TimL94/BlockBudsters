@@ -8,6 +8,7 @@ import Menu from './pages/Menu.jsx'
 import Order from './pages/Order.jsx'
 import Booking from './pages/Booking.jsx'
 import Contact from './pages/Contact.jsx'
+import Login from './pages/Login.jsx'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/Contact',
         element: <Contact />
+      },
+      {
+        path: '/Login',
+        element: <Login />
       },
     ]
   }

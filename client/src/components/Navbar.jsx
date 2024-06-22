@@ -30,7 +30,8 @@ import {
   Event as EventIcon,
   LocalPizza as PizzaIcon,
   EditCalendar as BookingIcon,
-  ContactPhone as ContactIcon
+  ContactPhone as ContactIcon,
+  Login as LoginIcon
 } from '@mui/icons-material';
 
 const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact'];
@@ -130,6 +131,23 @@ function ResponsiveAppBar() {
             </ListItemText>
           </ListItemButton>
         </ListItem>
+
+      </List>
+            
+      <Divider />
+      <List>
+        <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <LoginIcon />
+              </ListItemIcon>
+              <ListItemText>
+              <Link href='/Login' sx={{textDecoration:'none', color:'inherit'}}>
+                  Login
+                </Link>
+              </ListItemText>
+            </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -200,33 +218,22 @@ function ResponsiveAppBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <SettingsIcon />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+              <Typography
+                noWrap
+                component={Link}
+                href="/Login"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  flexGrow: 1,
+                  fontFamily: 'monospace',
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
                 }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+                Login
+              </Typography>
             </Box>
           </Toolbar>
         </Container>
