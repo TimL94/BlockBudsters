@@ -62,18 +62,6 @@ function ResponsiveAppBar() {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton >
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href='/Events' sx={{textDecoration:'none', color:'inherit'}}>
-                Events
-              </Link>
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
               <RestarauntMenuIcon />
@@ -81,6 +69,18 @@ function ResponsiveAppBar() {
             <ListItemText>
             <Link href='/Menu' sx={{textDecoration:'none', color:'inherit'}}>
                 Menu
+              </Link>
+            </ListItemText>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton >
+            <ListItemIcon>
+              <PizzaIcon />
+            </ListItemIcon>
+            <ListItemText>
+              <Link href='/Order' sx={{textDecoration:'none', color:'inherit'}}>
+                Order Online
               </Link>
             </ListItemText>
           </ListItemButton>
@@ -93,11 +93,11 @@ function ResponsiveAppBar() {
         <ListItem disablePadding>
           <ListItemButton >
             <ListItemIcon>
-              <PizzaIcon />
+              <EventIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Order' sx={{textDecoration:'none', color:'inherit'}}>
-                Order Online
+              <Link href='/Events' sx={{textDecoration:'none', color:'inherit'}}>
+                Events
               </Link>
             </ListItemText>
           </ListItemButton>
@@ -184,14 +184,13 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <NightlifeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
               component={Link}
               href="/"
               sx={{
-                mr: 2,
+                mr: 6,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
                 fontFamily: 'monospace',
