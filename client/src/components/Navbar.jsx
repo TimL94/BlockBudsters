@@ -26,14 +26,14 @@ import {
   Settings as SettingsIcon,
   MoveToInbox as InboxIcon,
   Mail as MailIcon,
-  RestaurantMenu as RestaurantMenuIcon,
+  RestaurantMenu as RestarauntMenuIcon,
   Event as EventIcon,
   LocalPizza as PizzaIcon,
   EditCalendar as BookingIcon,
   ContactPhone as ContactIcon
 } from '@mui/icons-material';
 
-const pages = ['Events', 'Menu'];
+const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact'];
 const settings = ['Account', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -61,12 +61,12 @@ function ResponsiveAppBar() {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton >
             <ListItemIcon>
               <EventIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Events' sx={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link href='/Events' sx={{textDecoration:'none', color:'inherit'}}>
                 Events
               </Link>
             </ListItemText>
@@ -75,10 +75,10 @@ function ResponsiveAppBar() {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <RestaurantMenuIcon />
+              <RestarauntMenuIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Menu' sx={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href='/Menu' sx={{textDecoration:'none', color:'inherit'}}>
                 Menu
               </Link>
             </ListItemText>
@@ -90,12 +90,12 @@ function ResponsiveAppBar() {
 
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton >
             <ListItemIcon>
               <PizzaIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Order' sx={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link href='/Order' sx={{textDecoration:'none', color:'inherit'}}>
                 Order Online
               </Link>
             </ListItemText>
@@ -107,16 +107,16 @@ function ResponsiveAppBar() {
               <BookingIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Booking' sx={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href='/Booking' sx={{textDecoration:'none', color:'inherit'}}>
                 Booking
               </Link>
             </ListItemText>
           </ListItemButton>
         </ListItem>
       </List>
-
+      
       <Divider />
-
+      
       <List>
         <ListItem disablePadding>
           <ListItemButton>
@@ -124,7 +124,7 @@ function ResponsiveAppBar() {
               <ContactIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Contact' sx={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href='/Contact' sx={{textDecoration:'none', color:'inherit'}}>
                 Contact
               </Link>
             </ListItemText>
@@ -136,7 +136,7 @@ function ResponsiveAppBar() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <AppBar position="fixed" sx={{ maxWidth: { xs: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto' }}>
+      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto'}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <NightlifeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -185,7 +185,7 @@ function ResponsiveAppBar() {
             >
               603 Bar
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -236,4 +236,3 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
-
