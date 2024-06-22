@@ -3,14 +3,9 @@ import {
   AppBar,
   Box,
   Toolbar,
-  IconButton,
   Typography,
-  Menu,
   Container,
-  Avatar,
   Button,
-  Tooltip,
-  MenuItem,
   Link,
   Drawer,
   List,
@@ -23,9 +18,6 @@ import {
 import {
   Menu as MenuIcon,
   Nightlife as NightlifeIcon,
-  Settings as SettingsIcon,
-  MoveToInbox as InboxIcon,
-  Mail as MailIcon,
   RestaurantMenu as RestarauntMenuIcon,
   Event as EventIcon,
   LocalPizza as PizzaIcon,
@@ -35,15 +27,8 @@ import {
 } from '@mui/icons-material';
 
 const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact'];
-const settings = ['Account', 'Logout'];
 
 function ResponsiveAppBar() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -62,28 +47,35 @@ function ResponsiveAppBar() {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            variant='text'
+            href='/Menu'
+            width='100%'
+          >
             <ListItemIcon>
               <RestarauntMenuIcon />
             </ListItemIcon>
             <ListItemText>
-            <Link href='/Menu' sx={{textDecoration:'none', color:'inherit'}}>
-                Menu
-              </Link>
+              Menu
             </ListItemText>
-          </ListItemButton>
+          </Button>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton >
+          <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            href='/Order'
+            width='100%'
+          >
             <ListItemIcon>
               <PizzaIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Order' sx={{textDecoration:'none', color:'inherit'}}>
-                Order Online
-              </Link>
+              Order Online
             </ListItemText>
-          </ListItemButton>
+          </Button>
         </ListItem>
       </List>
 
@@ -91,28 +83,34 @@ function ResponsiveAppBar() {
 
       <List>
         <ListItem disablePadding>
-          <ListItemButton >
+          <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            href='/Events'
+            width='100%'
+          >
             <ListItemIcon>
               <EventIcon />
             </ListItemIcon>
             <ListItemText>
-              <Link href='/Events' sx={{textDecoration:'none', color:'inherit'}}>
-                Events
-              </Link>
+              Events
             </ListItemText>
-          </ListItemButton>
+          </Button>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            href='/Booking'
+            width='100%'
+          >
             <ListItemIcon>
               <BookingIcon />
             </ListItemIcon>
             <ListItemText>
-            <Link href='/Booking' sx={{textDecoration:'none', color:'inherit'}}>
-                Booking
-              </Link>
+              Booking
             </ListItemText>
-          </ListItemButton>
+          </Button>
         </ListItem>
       </List>
       
@@ -120,16 +118,19 @@ function ResponsiveAppBar() {
       
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            href='/Contact'
+            width='100%'
+          >
             <ListItemIcon>
               <ContactIcon />
             </ListItemIcon>
             <ListItemText>
-            <Link href='/Contact' sx={{textDecoration:'none', color:'inherit'}}>
-                Contact
-              </Link>
+              Contact
             </ListItemText>
-          </ListItemButton>
+          </Button>
         </ListItem>
 
       </List>
@@ -137,16 +138,19 @@ function ResponsiveAppBar() {
       <Divider />
       <List>
         <ListItem disablePadding>
-            <ListItemButton>
+            <Button 
+            sx={{textDecoration:'none', color:'inherit', textTransform:'none'}}
+            component={Link}
+            href='/Login'
+            width='100%'
+          >
               <ListItemIcon>
                 <LoginIcon />
               </ListItemIcon>
               <ListItemText>
-              <Link href='/Login' sx={{textDecoration:'none', color:'inherit'}}>
-                  Login
-                </Link>
+                Login
               </ListItemText>
-            </ListItemButton>
+            </Button>
         </ListItem>
       </List>
     </Box>
@@ -190,7 +194,7 @@ function ResponsiveAppBar() {
               component={Link}
               href="/"
               sx={{
-                mr: 6,
+                mr: 7,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
                 fontFamily: 'monospace',
