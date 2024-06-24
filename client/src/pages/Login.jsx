@@ -9,6 +9,17 @@ import {
 
 
 function Login() {
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const email = data.get("email");
+        const password = data.get("password")
+
+
+        console.log(`email: ${email} | password: ${password}`)
+    }
+
     return(
         <Container
             sx={{
@@ -25,14 +36,15 @@ function Login() {
                     flexWrap: 'wrap',
                     '& > :not(style)': {
                     m: 1,
-                    width: {xs:'75vw', md:'45vw'},
+                    width: {xs:'75vw'},
+                    maxWidth:350,
                     textAlign:'center'
                     },
                 }}
             >
                 <Paper 
                     elevation={24}
-                    sx={{ borderRadius:5}}
+                    sx={{ borderRadius:5, border:.01}}
                 >
                     <h2>
                         Login
@@ -48,12 +60,14 @@ function Login() {
                         }}
                         noValidate
                         autoComplete="off"
+                        onSubmit={handleSubmit}
                     >
                         <Box sx={{mb:2}}>
                             <TextField
                             required
                             color="secondary"
                             label="Email"
+                            name='email'
                             defaultValue=" "
                             focused
                             />
@@ -63,12 +77,13 @@ function Login() {
                             required
                             color='secondary'
                             label="Password"
+                            name="password"
                             defaultValue=" "
                             focused
                             />
                         </Box>
                         <Box sx={{mt:2, mb:3}}>
-                            <Button variant="contained" sx={{width:'40%', m: 'auto', borderRadius:5}}>
+                            <Button variant="contained" sx={{width:'40%', m: 'auto', borderRadius:5}} type="submit">
                                 Submit
                             </Button>
                         </Box>

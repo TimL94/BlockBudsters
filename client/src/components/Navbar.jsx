@@ -159,7 +159,7 @@ function ResponsiveAppBar() {
       <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto'}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <NightlifeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <NightlifeIcon sx={{ display: { xs: 'none', lg: 'flex', md:'flex' }, mr: 1 }} />
             <Typography
               variant="h6"
               noWrap
@@ -167,7 +167,7 @@ function ResponsiveAppBar() {
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'none', lg: 'flex', md:'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
@@ -195,7 +195,7 @@ function ResponsiveAppBar() {
             >
               603 Bar
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent:'flex-end' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none', justifyContent:'flex-end' } }}>
               <Button onClick={toggleDrawer(true)} color='inherit'>
                 <MenuIcon />
               </Button>
@@ -203,7 +203,7 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }}}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -224,7 +224,7 @@ function ResponsiveAppBar() {
                 href="/Login"
                 sx={{
                   mr: 2,
-                  display: { xs: 'none', md: 'flex' },
+                  display: { xs: 'none', lg: 'flex' },
                   flexGrow: 1,
                   fontFamily: 'monospace',
                   letterSpacing: '.3rem',
