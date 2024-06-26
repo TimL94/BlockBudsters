@@ -14,12 +14,11 @@ const Footer = () => {
         <Box 
             sx={{
                 flexGrow: 0, 
-                position: 'fixed', 
-                bottom: 0, 
                 width: '100%',
-                mt:5,
+                mt: 2,
                 mb: 2,
-                py: 2
+                py: 2,
+                position: 'relative'
             }}
         >
             <Divider>
