@@ -26,7 +26,9 @@ import {
   Login as LoginIcon
 } from '@mui/icons-material';
 
-const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact'];
+import BarImage from  '../assets/images/603bar.png';
+
+const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact', 'Login'] ;
 
 function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
@@ -157,26 +159,20 @@ function ResponsiveAppBar() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '65vw' }, borderRadius: 10, margin: 'auto'}}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <NightlifeIcon sx={{ display: { xs: 'none', lg: 'flex', md:'flex' }, mr: 1 }} />
+      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '100vw', maxHeight:'150px'}}}>
+        <Container width='100vw'>
+          <Toolbar>
             <Typography
               variant="h6"
               noWrap
               component={Link}
               href="/"
               sx={{
-                mr: 2,
                 display: { xs: 'none', lg: 'flex', md:'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                mt:-10
               }}
             >
-              603 Bar
+              <img src={BarImage} style={{width:'150px', height:'300px' }}/>
             </Typography>
             <Typography
               variant="h5"
@@ -184,19 +180,16 @@ function ResponsiveAppBar() {
               component={Link}
               href="/"
               sx={{
-                mr: 7,
                 display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                flexGrow: 0,
+                mt:-5,
+                mb:-5,
+                ml:-2
               }}
             >
-              603 Bar
+              <img src={BarImage} style={{width:'75px', height:'150px' }}/>
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none', justifyContent:'flex-end' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none', justifyContent:'flex-end' }, mr: -2 }}>
               <Button onClick={toggleDrawer(true)} color='inherit'>
                 <MenuIcon />
               </Button>
@@ -204,37 +197,18 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end' }}}>
               {pages.map((page) => (
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
                   component={Link}
                   href={`/${page}`}
-                  sx={{ my: 2, color: 'white', display: 'block', textDecoration: 'none' }}
+                  sx={{ my: 2, color: 'white', display: 'block', textDecoration: 'none', textTransform: 'none' }}
                 >
                   {page}
                 </Button>
               ))}
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Typography
-                noWrap
-                component={Link}
-                href="/Login"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', lg: 'flex' },
-                  flexGrow: 1,
-                  fontFamily: 'monospace',
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                Login
-              </Typography>
             </Box>
           </Toolbar>
         </Container>
