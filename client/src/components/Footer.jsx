@@ -17,7 +17,7 @@ const Footer = () => {
                 position: 'fixed', 
                 bottom: 0, 
                 width: '100%',
-                mt:2,
+                mt:5,
                 mb: 2,
                 py: 2
             }}
