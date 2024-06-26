@@ -11,13 +11,11 @@ import {
   List,
   Divider,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  Nightlife as NightlifeIcon,
   RestaurantMenu as RestarauntMenuIcon,
   Event as EventIcon,
   LocalPizza as PizzaIcon,
@@ -183,7 +181,7 @@ function ResponsiveAppBar() {
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 0,
                 mt:-5,
-                mb:-5,
+                mb:-4,
                 ml:-2
               }}
             >
@@ -197,7 +195,7 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end' }}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }, mt:5}}>
               {pages.map((page) => (
                 <Button
                   key={page}
