@@ -44,7 +44,7 @@ function Login() {
             >
                 <Paper 
                     elevation={24}
-                    sx={{ borderRadius:5, border:.01}}
+                    sx={{ borderRadius:5, border:1}}
                 >
                     <h2>
                         Login
@@ -64,32 +64,40 @@ function Login() {
                     >
                         <Box sx={{mb:2}}>
                             <TextField
-                            required
-                            color="secondary"
-                            label="Email"
-                            name='email'
-                            defaultValue=" "
-                            focused
+                                required
+                                color="secondary"
+                                label="Email"
+                                name='email'
+                                defaultValue=" "
+                                focused
                             />
                         </Box>
                         <Box>
                             <TextField
-                            required
-                            color='secondary'
-                            label="Password"
-                            name="password"
-                            defaultValue=" "
-                            focused
+                                required
+                                color='secondary'
+                                label="Password"
+                                name="password"
+                                defaultValue=" "
+                                focused
                             />
                         </Box>
                         <Box sx={{mt:2, mb:3}}>
-                            <Button variant="contained" sx={{width:'40%', m: 'auto', borderRadius:5}} type="submit">
+                            <Button 
+                                variant="contained"
+                                sx={{
+                                    width:'40%',
+                                    m: 'auto',
+                                    borderRadius:5
+                                }} 
+                                type="submit"
+                            >
                                 Submit
                             </Button>
                         </Box>
                         <Box sx={{mb:2}}>
                             Don't have an account?<br></br>
-                            Sign up <Link>Here!</Link>
+                            Sign up <Link href='/'>Here!</Link>
                         </Box>
                     </Box>
                 </Paper>

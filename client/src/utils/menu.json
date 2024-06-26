@@ -1,0 +1,322 @@
+[
+    {
+      "name": "PEPSI",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "DIET PEPSI",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "MOUNTAIN DEW",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "MOUNTAIN DEW Baja Blast",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "AQUAFINA",
+      "price": "$1.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "CELSIUS Arctic Vibe",
+      "price": "$2.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "CELSIUS Cosmic Vibe",
+      "price": "$2.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "CELSIUS Orange",
+      "price": "$2.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "CRUSH (Orange)",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "MUG Root Beer",
+      "price": "$2.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "GATORADE (Lemon Lime)",
+      "price": "$2.25",
+      "category": "Drinks"
+    },
+    {
+      "name": "GATORADE (Cool Blue)",
+      "price": "$2.25",
+      "category": "Drinks"
+    },
+    {
+      "name": "PURE LEAF (Lemon)",
+      "price": "$3.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "PURE LEAF (Raspberry)",
+      "price": "$3.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "PURE LEAF (Unsweetened)",
+      "price": "$3.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "PROPEL (Strawberry Kiwi)",
+      "price": "$2.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "PROPEL (Grape)",
+      "price": "$2.75",
+      "category": "Drinks"
+    },
+    {
+      "name": "DOLE Apple Juice",
+      "price": "$3.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "DOLE Orange Juice",
+      "price": "$3.50",
+      "category": "Drinks"
+    },
+    {
+      "name": "12\" Cheese Pizza",
+      "price": "$9.99",
+      "category": "Build-Your-Own Pizza"
+    },
+    {
+      "name": "16\" Cheese Pizza",
+      "price": "$14.99",
+      "category": "Build-Your-Own Pizza"
+    },
+    {
+      "name": "Gluten Free Pizza",
+      "price": "$11.99",
+      "category": "Build-Your-Own Pizza"
+    },
+    {
+      "name": "Specialty Pizzas",
+      "items": [
+        {
+          "name": "BBQ Chicken",
+          "sizes": [
+            ["12", "$12.99"],
+            ["16", "$17.99"],
+            ["Gluten Free", "$14.99"]
+          ],
+          "description": "chicken & BBQ sauce. No red sauce"
+        },
+        {
+          "name": "Big Mac",
+          "sizes": [
+            ["12", "$15.99"],
+            ["16", "$20.99"],
+            ["Gluten Free", "$17.99"]
+          ],
+          "description": "Thousand island base, hamburger, onion, pickles"
+        },
+        {
+          "name": "Buffalo Chicken",
+          "sizes": [
+            ["12", "$12.99"],
+            ["16", "$17.99"],
+            ["Gluten Free", "$14.99"]
+          ],
+          "description": "chicken & homemade buffalo sauce. No red sauce"
+        },
+        {
+          "name": "Chicken Bacon Ranch",
+          "sizes": [
+            ["12", "$13.99"],
+            ["16", "$18.99"],
+            ["Gluten Free", "$15.99"]
+          ],
+          "description": "chicken, Ken's ranch, and bacon. No red sauce"
+        },
+        {
+          "name": "Fly'n Hawaiian",
+          "sizes": [
+            ["12", "$11.99"],
+            ["16", "$16.99"],
+            ["Gluten Free", "$16.99"]
+          ],
+          "description": "bacon, pineapple & jalapeno"
+        },
+        {
+          "name": "Mr. Meaty",
+          "sizes": [
+            ["12", "$13.99"],
+            ["16", "$18.99"],
+            ["Gluten Free", "$15.99"]
+          ],
+          "description": "pepperoni, hamburg, sausage & bacon"
+        },
+        {
+          "name": "Thai-Phoon",
+          "sizes": [
+            ["12", "$14.99"],
+            ["16", "$19.99"],
+            ["Gluten Free", ""]
+          ],
+          "description": "chicken, sweet chili, bacon, green peppers, pineapple & sriracha. No red sauce"
+        },
+        {
+          "name": "The Bird",
+          "sizes": [
+            ["12", "$10.99"],
+            ["16", "$15.99"],
+            ["Gluten Free", "$12.99"]
+          ],
+          "description": "white pizza. Olive oil & garlic base. ricotta and a pinch of red pepper flakes"
+        },
+        {
+          "name": "The Kitchen Sink",
+          "sizes": [
+            ["12", "$15.99"],
+            ["16", "$20.99"],
+            ["Gluten Free", ""]
+          ],
+          "description": "pepperoni, bacon, sausage, green pepper, red onion & mushroom"
+        },
+        {
+          "name": "Veggie",
+          "sizes": [
+            ["12", "$12.99"],
+            ["16", "$17.99"],
+            ["Gluten Free", "$14.99"]
+          ],
+          "description": "green pepper, red onion, mushroom, tomato & garlic"
+        }
+      ]
+    },
+    {
+      "name": "French Fries",
+      "price": "$6.99",
+      "category": "Appetizers"
+    },
+    {
+      "name": "Mozzarella Sticks",
+      "description": "Deep fried mozzarella cheese served with a side of in house made marinara.",
+      "price": "$6.99",
+      "category": "Appetizers"
+    },
+    {
+      "name": "Onion Rings",
+      "price": "$6.99",
+      "category": "Appetizers"
+    },
+    {
+      "name": "Pepperjack Mac and Cheese Bites",
+      "description": "Deep fried pepper jack macaroni and cheese bites. Comes with a side of chipotle ranch.",
+      "price": "$7.99",
+      "category": "Appetizers"
+    },
+    {
+      "name": "603 Sampler",
+      "description": "Chicken Fingers, Pepperjack Macaroni Bites, Mozzarella Sticks, Onion Rings",
+      "price": "$16.99",
+      "category": "Appetizers"
+    },
+    {
+      "name": "Cheeseburger",
+      "price": "$6.99",
+      "category": "Burgers/Hot Dog"
+    },
+    {
+      "name": "Cheeseburger w/ Fries",
+      "price": "$12.99",
+      "category": "Burgers/Hot Dog"
+    },
+    {
+      "name": "Hot Dog",
+      "price": "$2.99",
+      "category": "Burgers/Hot Dog"
+    },
+    {
+      "name": "Hot Dog w/ Fries",
+      "price": "$8.99",
+      "category": "Burgers/Hot Dog"
+    },
+    {
+      "name": "Wings (8)",
+      "price": "$10.99",
+      "category": "Tenders & Wings"
+    },
+    {
+      "name": "Wings (16)",
+      "price": "$18.99",
+      "category": "Tenders & Wings"
+    },
+    {
+      "name": "Chicken Tenders (6)",
+      "price": "$9.99",
+      "category": "Tenders & Wings"
+    },
+    {
+      "name": "Chicken Tenders (12)",
+      "price": "$16.99",
+      "category": "Tenders & Wings"
+    },
+    {
+      "name": "Kids Tenders & Fries",
+      "price": "$7.99",
+      "category": "Kids"
+    },
+    {
+      "name": "Kids Tenders & Onion Rings",
+      "price": "$7.99",
+      "category": "Kids"
+    },
+    {
+      "name": "Caesar Salad",
+      "price": "$7.99",
+      "category": "Salads"
+    },
+    {
+      "name": "House Salad",
+      "description": "Romaine. Green Pepper. Red Onion. Cucumber. Cherry Tomato. Mozzarella Shreds.",
+      "price": "$9.99",
+      "category": "Salads"
+    },
+    {
+      "name": "Steak & Cheese",
+      "price": "$8.99",
+      "category": "Subs (Hot)"
+    },
+    {
+      "name": "Meatball Sub",
+      "price": "$8.99",
+      "category": "Subs (Hot)"
+    },
+    {
+      "name": "Chicken Parmesan",
+      "price": "$8.99",
+      "category": "Subs (Hot)"
+    },
+    {
+      "name": "Fried Dough Bites",
+      "price": "$7.99",
+      "category": "Desserts"
+    },
+    {
+      "name": "Cinnamon Knots",
+      "price": "$5.99",
+      "category": "Desserts"
+    }
+  ]
+  

@@ -1,0 +1,30 @@
+/* Reset all margins and paddings */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and border are included in width/height */
+}
+
+/* Remove list styles (bullet points) */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default hyperlink styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Ensure elements are visible and behave consistently */
+article, aside, details, figcaption, figure, footer, header, main, nav, section {
+  display: block;
+}
+
+/* Ensure images are scalable */
+img {
+  max-width: 100%;
+  height: auto;
+}

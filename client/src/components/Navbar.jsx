@@ -64,7 +64,8 @@ function ResponsiveAppBar() {
           <Button 
             sx={buttonStyles}
             component={Link}
-            href='/Order'
+            href='https://www.toasttab.com/local/order/603pizza/r-9ffe1139-45e2-4d9b-8aff-ed2dc38760c2'
+            target='_blank'
             width='100%'
           >
             <ListItemIcon>
