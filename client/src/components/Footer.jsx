@@ -16,10 +16,10 @@ const Footer = () => {
                 flexGrow: 0, 
                 position: 'fixed', 
                 bottom: 0, 
-                width: '100%', 
+                width: '100%',
+                mt:2,
                 mb: 2,
-                py: 2,
-                bgcolor: 'background.paper',
+                py: 2
             }}
         >
             <Divider>
