@@ -13,7 +13,7 @@ import Desserts from '../components/menu components/Desserts';
 
 
 function linkItems() {
-    const linkSx = { mx: 1 }
+    const linkSx = { mx: 1, fontSize: '1.25rem' }
                 return (
                 <>
                 <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
@@ -40,13 +40,13 @@ function Menu() {
                     alignItems: 'center',
                     overflowX: 'auto',
                     whiteSpace: 'nowrap',
-                    minHeight: '2rem',
+                    minHeight: '3rem',
                     border: 2,
                     borderRadius: 2.5,
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '90%',
+                    opacity: '95%',
                 }}
             >
                 {linkItems()}
