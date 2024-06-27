@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 
 const Footer = () => {
+const textStyles = { fontSize: '0.6rem', fontWeight: 300, py: 0.5 };
+
     return (
         <Box 
             sx={{
@@ -34,29 +36,29 @@ const Footer = () => {
                     <Grid container justifyContent="center" spacing={2}>
                         <Grid item>
                             <List sx={{ p: 0 }}>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Sunday: 11:00am-10:00pm
                                 </ListItem>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Monday: Closed
                                 </ListItem>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Tuesday: 11:00am-10:00pm
                                 </ListItem>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Wednesday: 11:00am-10:00pm
                                 </ListItem>
                             </List>
                         </Grid>
                         <Grid item>
                             <List sx={{ p: 0 }}>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Thursday: 11:00am-10:00pm
                                 </ListItem>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Friday: 11:00am-11:00pm
                                 </ListItem>
-                                <ListItem sx={{ fontSize: '0.6rem', fontWeight: 300, py: 0.5 }}>
+                                <ListItem sx={textStyles}>
                                     Saturday: 11:00am-11:00pm
                                 </ListItem>
                             </List>

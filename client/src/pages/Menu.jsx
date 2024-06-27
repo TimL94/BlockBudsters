@@ -17,13 +17,21 @@ function linkItems() {
                 return (
                 <>
                 <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#appetizers' sx={linkSx}>{'Appetizers'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#burgerAndHotDog' sx={linkSx}>{'Burgers and Dogs'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#tendersAndWings' sx={linkSx}>{'Tenders and Wings'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#salads' sx={linkSx}>{'Salads'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#subs' sx={linkSx}>{'Subs'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#kids' sx={linkSx}>{'Kids'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#desserts' sx={linkSx}>{'Desserts'}</Link>
+                |
                 <Link variant='button' underline='none' color='inherit' href='#drinks' sx={linkSx}>{'Drinks'}</Link>
                 </>)
 }
