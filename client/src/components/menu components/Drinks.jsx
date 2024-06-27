@@ -12,7 +12,15 @@ const Drinks = (Array) => {
             <Grid container spacing={3}>
                 {drinkData.map((item, index) => (
                     <Grid item md={6} x s={12} key={index}>
-                        <Card sx={{ border: 0, borderRadius: 5, minHeight: '200px', minWidth:'310px' }}>
+                        <Card 
+              sx={{
+                border: 0,
+                borderRadius: 5,
+                minHeight: '200px',
+                minWidth: '310px'
+              }}
+              raised= 'true'
+              >
                             <CardHeader
                             title={item.name}
                             />

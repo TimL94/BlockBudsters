@@ -13,7 +13,14 @@ const BurgerAndHotDog = () => {
       <Grid container spacing={3}>
         {burgerAndHotDogData.map((item, index) => (
           <Grid item md={6} xs={12} key={index}>
-            <Card sx={{ border: 0, borderRadius: 5, minHeight: '200px' }}>
+            <Card 
+              sx={{
+                border: 0,
+                borderRadius: 5,
+                minHeight: '200px'
+              }}
+              raised= 'true'
+              >
               <CardHeader title={item.name} />
               <CardContent>
                 <Typography variant="body1">{item.description}</Typography>
