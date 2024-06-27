@@ -16,14 +16,13 @@ const Desserts = () => {
               sx={{
                 border: 0,
                 borderRadius: 5,
-                minHeight: '200px'
+                minHeight: '100px'
               }}
               raised= 'true'
               >
               <CardHeader title={item.name} />
               <CardContent>
-                <Typography variant="body1">{item.description}</Typography>
-                <Divider sx={{ my: 2 }} />
+                <Divider sx={{ my: 1 }} />
                 <Typography variant="body2">{`${item.price}`}</Typography>
               </CardContent>
             </Card>

@@ -16,7 +16,7 @@ const Subs = () => {
               sx={{
                 border: 0,
                 borderRadius: 5,
-                minHeight: '200px'
+                minHeight: '100px'
               }}
               raised= 'true'
               >

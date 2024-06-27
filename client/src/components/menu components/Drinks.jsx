@@ -16,7 +16,7 @@ const Drinks = (Array) => {
               sx={{
                 border: 0,
                 borderRadius: 5,
-                minHeight: '200px',
+                minHeight: '100px',
                 minWidth: '310px'
               }}
               raised= 'true'
@@ -25,7 +25,8 @@ const Drinks = (Array) => {
                             title={item.name}
                             />
                             <CardContent>
-                                {item.price}
+                                <Divider sx={{ my:1 }} />
+                                <Typography variant="body2">{`${item.price}`}</Typography>
                             </CardContent>
                         </Card>
                     </Grid>

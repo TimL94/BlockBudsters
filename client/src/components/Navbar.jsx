@@ -24,7 +24,7 @@ import {
   Login as LoginIcon
 } from '@mui/icons-material';
 
-import BarImage from  '../assets/images/603bar.png';
+import BarImage from  '../assets/images/603BarBanner.png';
 
 const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact', 'Login'] ;
 
@@ -167,10 +167,11 @@ function ResponsiveAppBar() {
               href="/"
               sx={{
                 display: { xs: 'none', lg: 'flex', md:'flex' },
-                mt:-10
+                mt: .3,
+                mb: .3
               }}
             >
-              <img src={BarImage} style={{width:'150px', height:'300px' }}/>
+              <img src={BarImage} style={{width:'75px', height:'75px' }}/>
             </Typography>
             <Typography
               variant="h5"
@@ -180,12 +181,12 @@ function ResponsiveAppBar() {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 0,
-                mt:-5,
-                mb:-4,
-                ml:-2
+                ml:-2,
+                mb:.2,
+                mt:.2
               }}
             >
-              <img src={BarImage} style={{width:'75px', height:'150px' }}/>
+              <img src={BarImage} style={{width:'75px', height:'75px' }}/>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none', justifyContent:'flex-end' }, mr: -2 }}>
               <Button onClick={toggleDrawer(true)} color='inherit'>
@@ -195,14 +196,14 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }, mt:5}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }, mt:-1, mb:-5}}>
               {pages.map((page) => (
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
                   component={Link}
                   href={`/${page}`}
-                  sx={{ my: 2, color: 'white', display: 'block', textDecoration: 'none', textTransform: 'none' }}
+                  sx={{ my: 1, color: 'white', display: 'block', textDecoration: 'none', textTransform: 'none', fontSize:'1.5rem' }}
                 >
                   {page}
                 </Button>
