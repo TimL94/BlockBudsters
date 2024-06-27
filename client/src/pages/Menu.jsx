@@ -13,7 +13,7 @@ import Desserts from '../components/menu components/Desserts';
 
 
 function linkItems() {
-    const linkSx = { mx: 1, fontSize: '1.25rem' }
+    const linkSx = { mx: 1, fontSize: '1.25rem', textTransform: 'none' }
                 return (
                 <>
                 <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
