@@ -12,7 +12,7 @@ const Kids = () => {
       <Grid container spacing={3}>
         {kidsData.map((item, index) => (
           <Grid item md={6} xs={12} key={index}>
-            <Card>
+            <Card sx={{ border: 0, borderRadius: 5, minHeight: '200px' }}>
               <CardHeader title={item.name} />
               <CardContent>
                 <Typography variant="body1">{item.description}</Typography>
