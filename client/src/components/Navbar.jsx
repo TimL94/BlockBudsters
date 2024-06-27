@@ -188,7 +188,7 @@ function ResponsiveAppBar() {
             >
               <img src={BarImage} style={{width:'75px', height:'75px' }}/>
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none', justifyContent:'flex-end' }, mr: -2 }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent:'flex-end' }, mr: -2 }}>
               <Button onClick={toggleDrawer(true)} color='inherit'>
                 <MenuIcon />
               </Button>
@@ -196,7 +196,7 @@ function ResponsiveAppBar() {
                 {DrawerList}
               </Drawer>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }, mt:-1, mb:-5}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }, mt:-1, mb:-5}}>
               {pages.map((page) => (
                 <Button
                   key={page}

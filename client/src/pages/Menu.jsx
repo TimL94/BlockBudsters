@@ -11,7 +11,22 @@ import Salads from '../components/menu components/Salads';
 import Subs from '../components/menu components/Subs';
 import Desserts from '../components/menu components/Desserts';
 
-const linkSx = { mx: 1 }
+
+function linkItems() {
+    const linkSx = { mx: 1 }
+                return (
+                <>
+                <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#appetizers' sx={linkSx}>{'Appetizers'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#burgerAndHotDog' sx={linkSx}>{'Burgers and Dogs'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#tendersAndWings' sx={linkSx}>{'Tenders and Wings'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#salads' sx={linkSx}>{'Salads'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#subs' sx={linkSx}>{'Subs'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#kids' sx={linkSx}>{'Kids'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#desserts' sx={linkSx}>{'Desserts'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#drinks' sx={linkSx}>{'Drinks'}</Link>
+                </>)
+}
 
 function Menu() {
     return (
@@ -20,7 +35,7 @@ function Menu() {
                 sx={{
                     position: 'sticky',
                     top: '10px',
-                    display: 'flex',
+                    display: { xs: 'flex', md: 'none' },
                     flexDirection: 'row',
                     alignItems: 'center',
                     overflowX: 'auto',
@@ -34,15 +49,28 @@ function Menu() {
                     opacity: '90%',
                 }}
             >
-                <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#appetizers' sx={linkSx}>{'Appetizers'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#burgerAndHotDog' sx={linkSx}>{'Burgers and Dogs'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#tendersAndWings' sx={linkSx}>{'Tenders and Wings'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#salads' sx={linkSx}>{'Salads'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#subs' sx={linkSx}>{'Subs'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#kids' sx={linkSx}>{'Kids'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#desserts' sx={linkSx}>{'Desserts'}</Link>
-                <Link variant='button' underline='none' color='inherit' href='#drinks' sx={linkSx}>{'Drinks'}</Link>
+                {linkItems()}
+            </Box>
+            <Box
+                sx={{
+                    position: 'sticky',
+                    top: '10px',
+                    display: { xs: 'none', md: 'flex' },
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflowX: 'auto',
+                    whiteSpace: 'nowrap',
+                    minHeight: '2rem',
+                    border: 2,
+                    borderRadius: 2.5,
+                    mt:1,
+                    mb:-2,
+                    background: 'white',
+                    opacity: '90%',
+                }}
+            >
+                {linkItems()}
             </Box>
             <Box id='pizzas'>
                 <Pizzas />
