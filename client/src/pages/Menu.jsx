@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Link } from '@mui/material';
+import { Box, Container, Link, Typography } from '@mui/material';
 
 import Drinks from '../components/menu components/Drinks';
 import Pizzas from '../components/menu components/Pizzas';
@@ -19,19 +19,19 @@ function Menu() {
             <Box
                 sx={{
                     position: 'sticky',
-                    top: 0,
+                    top: '10px',
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                     overflowX: 'auto',
                     whiteSpace: 'nowrap',
                     minHeight: '2rem',
-                    border: 1,
-                    borderRadius: 5,
+                    border: 2,
+                    borderRadius: 2.5,
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '90%'
+                    opacity: '90%',
                 }}
             >
                 <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
