@@ -21,7 +21,7 @@ function linkItems() {
                 |
                 <Link variant='button' underline='none' color='inherit' href='#edibles' sx={linkSx}>{'Edibles'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#limited' sx={linkSx}>{'Salads'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#limited' sx={linkSx}>{'Limited'}</Link>
                 |
                 <Link variant='button' underline='none' color='inherit' href='#specials' sx={linkSx}>{'Specials'}</Link>
                 </>)
