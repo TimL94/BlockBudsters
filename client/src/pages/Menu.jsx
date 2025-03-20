@@ -2,35 +2,29 @@ import React from 'react';
 import { Box, Container, Link, Typography } from '@mui/material';
 
 import Drinks from '../components/menu components/Drinks';
-import Pizzas from '../components/menu components/Pizzas';
-import Appetizers from '../components/menu components/Appetizers';
-import BurgerAndHotDog from '../components/menu components/BurgersAndHotDogs';
-import TendersAndWings from '../components/menu components/TendersAndWings';
-import Kids from '../components/menu components/Kids';
+import Concentrates from '../components/menu components/Concentrates';
+import Flower from '../components/menu components/Flower';
+import PreRolls from '../components/menu components/PreRolls';
+import Edibles from '../components/menu components/Edibles';
+import Specials from '../components/menu components/Specials';
 import Salads from '../components/menu components/Salads';
-import Subs from '../components/menu components/Subs';
-import Desserts from '../components/menu components/Desserts';
 
 
 function linkItems() {
     const linkSx = { mx: 1, fontSize: '1.25rem', textTransform: 'none' }
                 return (
                 <>
-                <Link variant='button' underline='none' color='inherit' href='#pizzas' sx={linkSx}>{'Pizzas'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#concentrates' sx={linkSx}>{'Concentrates'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#appetizers' sx={linkSx}>{'Appetizers'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#flower' sx={linkSx}>{'Flower'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#burgerAndHotDog' sx={linkSx}>{'Burgers and Dogs'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#preRolls' sx={linkSx}>{'Pre Rolls'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#tendersAndWings' sx={linkSx}>{'Tenders and Wings'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#edibles' sx={linkSx}>{'Edibles'}</Link>
                 |
                 <Link variant='button' underline='none' color='inherit' href='#salads' sx={linkSx}>{'Salads'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#subs' sx={linkSx}>{'Subs'}</Link>
-                |
-                <Link variant='button' underline='none' color='inherit' href='#kids' sx={linkSx}>{'Kids'}</Link>
-                |
-                <Link variant='button' underline='none' color='inherit' href='#desserts' sx={linkSx}>{'Desserts'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#specials' sx={linkSx}>{'Specials'}</Link>
                 |
                 <Link variant='button' underline='none' color='inherit' href='#drinks' sx={linkSx}>{'Drinks'}</Link>
                 </>)
@@ -80,29 +74,23 @@ function Menu() {
             >
                 {linkItems()}
             </Box>
-            <Box id='pizzas'>
-                <Pizzas />
+            <Box id='concentrates'>
+                <Concentrates />
             </Box>
-            <Box id='appetizers'>
-                <Appetizers />
+            <Box id='flower'>
+                <Flower />
             </Box>
-            <Box id='burgerAndHotDog'>
-                <BurgerAndHotDog />
+            <Box id='preRolls'>
+                <PreRolls />
             </Box>
-            <Box id='tendersAndWings'>
-                <TendersAndWings />
+            <Box id='edibles'>
+                <Edibles />
             </Box>
             <Box id='salads'>
                 <Salads />
-            </Box>
-            <Box id='subs'>
-                <Subs />
-            </Box>
-            <Box id='kids'>
-                <Kids />
-            </Box>
-            <Box id='desserts'>
-                <Desserts />
+            </Box>               
+            <Box id='specials'>
+                <Specials />
             </Box>
             <Box id='drinks'>
                 <Drinks />
