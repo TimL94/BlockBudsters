@@ -24,7 +24,7 @@ import {
   Login as LoginIcon
 } from '@mui/icons-material';
 
-import BarImage from  '../assets/images/603BarBanner.png';
+import logo from  '../assets/images/BlockBudsters.png';
 
 const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact', 'Login'] ;
 
@@ -157,7 +157,7 @@ function ResponsiveAppBar() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '100vw', maxHeight:'150px'}}}>
+      <AppBar position="static" sx={{ maxWidth: { mb: '100vw', md: '100vw', maxHeight:'150px', background: 'black'}}}>
         <Container width='100vw'>
           <Toolbar>
             <Typography
@@ -171,7 +171,7 @@ function ResponsiveAppBar() {
                 mb: .3
               }}
             >
-              <img src={BarImage} style={{width:'75px', height:'75px' }}/>
+              <img src={logo} style={{width:'150px', height:'75px' }}/>
             </Typography>
             <Typography
               variant="h5"
@@ -186,7 +186,7 @@ function ResponsiveAppBar() {
                 mt:.2
               }}
             >
-              <img src={BarImage} style={{width:'75px', height:'75px' }}/>
+              <img src={logo} style={{width:'150x', height:'75px' }}/>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent:'flex-end' }, mr: -2 }}>
               <Button onClick={toggleDrawer(true)} color='inherit'>

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Box, Card, CardHeader, CardContent, Typography, Divider, Grid } from "@mui/material";
 import menuData from '../../utils/menu.json';
-const saladData = menuData.filter((index) => index.category === 'Salads');
+const limitedData = menuData.filter((index) => index.category === 'Limited');
 
 
-const Salads = () => {
+const Limited = () => {
   return (
     <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt:2 }}>
-      <Typography variant="h4" gutterBottom>Salads</Typography>
+      <Typography variant="h4" gutterBottom>Limited</Typography>
       <Divider/>
       <Grid container spacing={3}>
-        {saladData.map((item, index) => (
+        {limitedData.map((item, index) => (
           <Grid item md={6} xs={12} key={index}>
             <Card 
               sx={{
@@ -35,4 +35,4 @@ const Salads = () => {
   );
 }
 
-export default Salads;
+export default Limited;

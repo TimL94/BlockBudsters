@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Container, Link, Typography } from '@mui/material';
 
-import Drinks from '../components/menu components/Drinks';
 import Concentrates from '../components/menu components/Concentrates';
 import Flower from '../components/menu components/Flower';
 import PreRolls from '../components/menu components/PreRolls';
 import Edibles from '../components/menu components/Edibles';
 import Specials from '../components/menu components/Specials';
-import Salads from '../components/menu components/Salads';
+import Limited from '../components/menu components/Limited';
 
 
 function linkItems() {
@@ -22,11 +21,9 @@ function linkItems() {
                 |
                 <Link variant='button' underline='none' color='inherit' href='#edibles' sx={linkSx}>{'Edibles'}</Link>
                 |
-                <Link variant='button' underline='none' color='inherit' href='#salads' sx={linkSx}>{'Salads'}</Link>
+                <Link variant='button' underline='none' color='inherit' href='#limited' sx={linkSx}>{'Salads'}</Link>
                 |
                 <Link variant='button' underline='none' color='inherit' href='#specials' sx={linkSx}>{'Specials'}</Link>
-                |
-                <Link variant='button' underline='none' color='inherit' href='#drinks' sx={linkSx}>{'Drinks'}</Link>
                 </>)
 }
 
@@ -86,14 +83,11 @@ function Menu() {
             <Box id='edibles'>
                 <Edibles />
             </Box>
-            <Box id='salads'>
-                <Salads />
+            <Box id='limited'>
+                <Limited />
             </Box>               
             <Box id='specials'>
                 <Specials />
-            </Box>
-            <Box id='drinks'>
-                <Drinks />
             </Box>
         </Container>
     );

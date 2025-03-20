@@ -25,13 +25,13 @@ const textStyles = { fontSize: '0.6rem', fontWeight: 300, py: 0.5 };
         >
             <Divider>
                 <Typography variant="h6" sx={{ fontSize: '0.875rem', fontWeight: 300 }}>
-                    603 Bar and Lounge
+                    Block Budsters
                 </Typography>
             </Divider>
             <Container>
                 <Box sx={{ textAlign: 'center', mt: 1 }}>
                     <Typography variant="subtitle2" sx={{ fontSize: '0.7rem', fontWeight: 300, mb: 1 }}>
-                        Kitchen Hours
+                        Store Hours
                     </Typography>
                     <Grid container justifyContent="center" spacing={2}>
                         <Grid item>
