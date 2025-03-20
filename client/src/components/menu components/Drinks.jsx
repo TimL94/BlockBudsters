@@ -3,7 +3,7 @@ import menuData from '../../utils/menu.json'
 
 const drinkData = menuData.filter((index) => index.category === 'Drinks');
 
-const Drinks = (Array) => {
+const Drinks = () => {
 
     return (
         <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt:2 }}>
@@ -11,13 +11,12 @@ const Drinks = (Array) => {
             <Divider/>
             <Grid container spacing={3}>
                 {drinkData.map((item, index) => (
-                    <Grid item md={6} x s={12} key={index}>
+                    <Grid item md={6} xs={12} key={index}>
                         <Card 
               sx={{
                 border: 0,
                 borderRadius: 5,
-                minHeight: '100px',
-                minWidth: '310px'
+                minHeight: '200px'
               }}
               raised= 'true'
               >
@@ -25,7 +24,7 @@ const Drinks = (Array) => {
                             title={item.name}
                             />
                             <CardContent>
-                                <Divider sx={{ my:1 }} />
+                                <Divider sx={{ my:2 }} />
                                 <Typography variant="body2">{`${item.price}`}</Typography>
                             </CardContent>
                         </Card>

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Box, Card, CardHeader, CardContent, Typography, Divider, Grid } from "@mui/material";
 import menuData from '../../utils/menu.json';
-const subdata = menuData.filter((index) => index.category === 'Subs (Hot)');
+const specialsData = menuData.filter((index) => index.category === 'Specials');
 
 
-const Subs = () => {
+const Specials = () => {
   return (
     <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt:2 }}>
-      <Typography variant="h4" gutterBottom>{`Subs (Hot)`}</Typography>
+      <Typography variant="h4" gutterBottom>Specials</Typography>
       <Divider/>
       <Grid container spacing={3}>
-        {subdata.map((item, index) => (
+        {specialsData.map((item, index) => (
           <Grid item md={6} xs={12} key={index}>
             <Card 
               sx={{
@@ -22,17 +22,20 @@ const Subs = () => {
               >
               <CardHeader title={item.name} />
               <CardContent>
-                <Typography variant="body1">{item.description}</Typography>
-                <Divider sx={{ my: 2 }} />
-                <Typography variant="body2">{`${item.price}`}</Typography>
+                <Divider sx={{ my: 1 }} />
+                <Typography variant="body2">{
+                  item.sizes.map((size, idx) => (
+                    <Typography key={idx} variant="body2">{`${size.size}: ${size.price}`}
+                    </Typography>
+                  ))
+                  }</Typography>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
-      <Divider />
     </Box>
   );
 }
 
-export default Subs;
+export default Specials;

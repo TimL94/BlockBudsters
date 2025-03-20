@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Card, CardHeader, CardContent, Typography, Divider, Grid } from "@mui/material";
 import menuData from '../../utils/menu.json';
-const appetizerData = menuData.filter((index) => index.category === 'Appetizers');
+const appetizerData = menuData.filter((index) => index.category === 'Flower');
 
 
-const Appetizers = () => {
+const Flower = () => {
   return (
     <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt:2 }}>
-      <Typography variant="h4" gutterBottom>Appetizers</Typography>
+      <Typography variant="h4" gutterBottom>Flower
+      </Typography>
       <Divider/>
       <Grid container spacing={3}>
         {appetizerData.map((item, index) => (
@@ -22,9 +23,12 @@ const Appetizers = () => {
               >
               <CardHeader title={item.name} />
               <CardContent>
-                <Typography variant="body1">{item.description}</Typography>
                 <Divider sx={{ my: 2 }} />
-                <Typography variant="body2">{`${item.price}`}</Typography>
+                <Typography variant="body1">{item.strain}</Typography>
+                <Divider sx={{ my: 2 }} />
+                {item.sizes.map((size, idx) => (
+                  <Typography key={idx} variant="body2">{`${size.size}: ${size.price}`}</Typography>
+                ))}
               </CardContent>
             </Card>
           </Grid>
@@ -34,4 +38,4 @@ const Appetizers = () => {
   );
 }
 
-export default Appetizers;
+export default Flower;

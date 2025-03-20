@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Card, CardHeader, CardContent, Typography, Divider, Grid } from "@mui/material";
 import menuData from '../../utils/menu.json';
 
-const pizzaData = menuData.filter((item) => item.category === 'Pizzas');
+const pizzaData = menuData.filter((item) => item.category === 'Concentrates');
 
-const Pizzas = () => {
+const Concentrates = () => {
   return (
     <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <Typography variant="h4" gutterBottom>Pizzas</Typography>
+      <Typography variant="h4" gutterBottom>Concentrates</Typography>
       <Divider/>
       <Grid container spacing={3}>
         {pizzaData.map((item, index) => (
@@ -36,4 +36,4 @@ const Pizzas = () => {
   );
 }
 
-export default Pizzas;
+export default Concentrates;
