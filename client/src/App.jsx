@@ -10,30 +10,44 @@ import './app.css';
 
 function App() {
   const [ isVerified,setIsVerified ] = useState(null);
+  const [ loading, setLoading] = useState(true);
+
+ 
 
   useEffect(() => {
     const storedStatus = localStorage.getItem('isVerified');
     const verifiedAt = localStorage.getItem('verifiedAt');
+  
+    
+
     if (storedStatus && verifiedAt) {
       const now = Date.now();
       const then = parseInt(verifiedAt, 10);
-      const minutePassed = (now - then) / (1000 * 60 );
-
-      if (minutePassed < 1 && storedStatus === 'false') {
-        setIsVerified(storedStatus === 'true');
-      } else {
+      const minutesPassed = (now - then) / (1000 * 60);
+  
+      // Expire "No" answer after 1 minute
+      if (storedStatus === 'false' && minutesPassed > 1) {
         localStorage.removeItem('isVerified');
         localStorage.removeItem('verifiedAt');
         setIsVerified(null);
       }
-    if (minutePassed > 30) {
-      localStorage.removeItem('isVerified');
-      localStorage.removeItem('verifiedAt');
+      // Expire any answer after 30 minutes
+      else if (minutesPassed > 30) {
+        localStorage.removeItem('isVerified');
+        localStorage.removeItem('verifiedAt');
+        setIsVerified(null);
+      }
+      // ✅ Still valid → set based on storedStatus
+      else {
+        setIsVerified(storedStatus === 'true');
+      }
+    } else {
+      // First time visit or no data saved
       setIsVerified(null);
     }
-  }
 
-  }, [])
+    setLoading(false);
+  }, []);
 
   const handleYes = () => {
     localStorage.setItem('isVerified', 'true');
@@ -46,6 +60,10 @@ function App() {
     localStorage.setItem('verifiedAt', Date.now().toString());
     setIsVerified(false);
   }
+
+  if (loading) {
+    return null; 
+  };
 
   if (isVerified === null) {
     return (

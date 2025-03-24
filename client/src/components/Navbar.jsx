@@ -26,7 +26,7 @@ import {
 
 import logo from  '../assets/images/BlockBudsters.png';
 
-const pages = ['Events', 'Menu', 'Order', 'Booking', 'Contact', 'Login'] ;
+const pages = [ 'Menu', 'Contact', 'Login'] ;
 
 function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
@@ -64,8 +64,7 @@ function ResponsiveAppBar() {
           <Button 
             sx={buttonStyles}
             component={Link}
-            href='https://www.toasttab.com/local/order/603pizza/r-9ffe1139-45e2-4d9b-8aff-ed2dc38760c2'
-            target='_blank'
+            href='/Order'
             width='100%'
           >
             <ListItemIcon>
@@ -79,42 +78,6 @@ function ResponsiveAppBar() {
       </List>
 
       <Divider />
-
-      <List>
-        <ListItem disablePadding>
-          <Button 
-            sx={buttonStyles}
-            component={Link}
-            href='/Events'
-            width='100%'
-          >
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText>
-              Events
-            </ListItemText>
-          </Button>
-        </ListItem>
-        <ListItem disablePadding>
-          <Button 
-            sx={buttonStyles}
-            component={Link}
-            href='/Booking'
-            width='100%'
-          >
-            <ListItemIcon>
-              <BookingIcon />
-            </ListItemIcon>
-            <ListItemText>
-              Booking
-            </ListItemText>
-          </Button>
-        </ListItem>
-      </List>
-      
-      <Divider />
-      
       <List>
         <ListItem disablePadding>
           <Button 
