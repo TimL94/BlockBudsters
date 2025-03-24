@@ -26,7 +26,7 @@ function App() {
         localStorage.removeItem('verifiedAt');
         setIsVerified(null);
       }
-    if (minutePassed > .1) {
+    if (minutePassed > 30) {
       localStorage.removeItem('isVerified');
       localStorage.removeItem('verifiedAt');
       setIsVerified(null);
