@@ -18,9 +18,9 @@ function Home() {
                     <Typography sx={{}}><h2>Welcome to BlockBudsters</h2></Typography>
                     <Typography sx={{}}><Divider>Medical Cannabis</Divider></Typography>
                     <Typography variant="body1" sx={{ mb: 20, mt: 10, fontStyle:'italic' }}>Dedicated to providing our clients with the highest quality medicinal products</Typography>
-                    <Divider>New Customer?</Divider>
+                    <Divider sx={{ fontStyle:'italic' }} >New Customer?</Divider>
                     <Typography variant="body1" sx={{ m: 3 }}>Create a new account <Link to='/Login' style={{ textDecoration: 'underline'}}>Here!</Link></Typography>
-                    <Divider>Existing Customer?</Divider>
+                    <Divider sx={{ fontStyle:'italic' }} >Existing Customer?</Divider>
                     <Typography variant="body1" sx={{ m: 3 }}>View our menu <Link to='/Menu' style={{ textDecoration: 'underline' }}>Here!</Link></Typography>
                 </Grid>
             </Grid>
