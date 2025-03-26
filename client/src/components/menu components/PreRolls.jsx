@@ -15,6 +15,7 @@ const PreRolls = () => {
           <Grid item md={6} xs={12} key={index}>
             <Card 
               sx={{
+                backgroundColor: 'rgba(255, 255, 255, 0.85)',
                 border: 0,
                 borderRadius: 5,
                 minHeight: '100px'

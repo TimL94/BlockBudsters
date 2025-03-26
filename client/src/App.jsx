@@ -120,7 +120,7 @@ function App() {
   }
 
   return (
-    <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh'}} boxSizing='border-box'>
+    <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh', color:'white'}} boxSizing='border-box'>
       <Navbar />
       <div>
         <Outlet sx={{ mb:20 }}/>

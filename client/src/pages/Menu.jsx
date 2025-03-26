@@ -45,7 +45,9 @@ function Menu() {
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '95%',
+                    opacity: '85%',
+                    color: 'black',
+                    textDecoration: 'italic',
                 }}
             >
                 {linkItems()}
@@ -66,7 +68,8 @@ function Menu() {
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '90%',
+                    opacity: '50%',
+                    color: 'black',
                 }}
             >
                 {linkItems()}

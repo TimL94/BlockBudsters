@@ -14,7 +14,7 @@ function Home() {
         >
 
             <Grid container spacing={3} justifyContent='center'>
-                <Grid item xs={10} md={10} sx={{textAlign: 'center', mt: 2}} >
+                <Grid item xs={10} md={10} sx={{textAlign: 'center', mt: 2, color:'white' }} >
                     <Typography sx={{}}><h2>Welcome to BlockBudsters</h2></Typography>
                     <Typography sx={{}}><Divider>Medical Cannabis</Divider></Typography>
                     <Typography variant="body1" sx={{ mb: 20, mt: 10, fontStyle:'italic' }}>Dedicated to providing our clients with the highest quality medicinal products</Typography>

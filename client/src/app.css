@@ -32,3 +32,13 @@ img {
 html {
   scroll-behavior: smooth;
 }
+
+body {
+  background-image: url('../src/assets/images/background.jpeg'); /* or use a relative path from public */
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}

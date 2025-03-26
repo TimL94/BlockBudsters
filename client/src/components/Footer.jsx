@@ -20,7 +20,8 @@ const textStyles = { fontSize: '0.6rem', fontWeight: 300, py: 0.5 };
                 mt: 2,
                 mb: 2,
                 py: 2,
-                position: 'relative'
+                position: 'relative',
+                color: 'white',
             }}
         >
             <Divider>
