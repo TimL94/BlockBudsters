@@ -24,7 +24,13 @@ const textStyles = { fontSize: '0.6rem', fontWeight: 300, py: 0.5 };
                 color: 'white',
             }}
         >
-            <Divider>
+            <Divider
+                sx={{
+                    "&::before, &::after": {
+                    borderColor: "white",
+                    }
+              }}
+              >
                 <Typography variant="h6" sx={{ fontSize: '0.875rem', fontWeight: 300 }}>
                     Block Budsters
                 </Typography>

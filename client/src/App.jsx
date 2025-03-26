@@ -1,10 +1,11 @@
 import Navbar from './components/Navbar';
 import { Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
 import Footer from './components/Footer.jsx';
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import './app.css';
+import theme from './utils/theme.js';
 
 
 
@@ -120,13 +121,15 @@ function App() {
   }
 
   return (
-    <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh', color:'white'}} boxSizing='border-box'>
-      <Navbar />
-      <div>
-        <Outlet sx={{ mb:20 }}/>
-      </div>
-      <Footer/>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh', color:'white'}} boxSizing='border-box'>
+        <Navbar />
+        <div>
+          <Outlet sx={{ mb:20 }}/>
+        </div>
+        <Footer/>
+      </Box>
+    </ThemeProvider>
   )
 }
 
