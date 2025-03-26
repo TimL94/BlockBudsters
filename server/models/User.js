@@ -4,13 +4,6 @@ const bcrypt = require('bcrypt');
 // schema for creating a user model with email validation
 const userSchema = new Schema(
     {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-            trim: true,
-            minlength: 6
-        },
         email: {
             type: String, 
             required: true,

@@ -6,19 +6,42 @@ import {
     Button,
     Link
 } from "@mui/material";
+import { LOGIN_USER } from "../utils/mutations";
+import { useMutation } from '@apollo/client';
+import React from "react";
+import Auth from "../utils/auth";
 
 
 function Login() {
+    const [login, { error, data }] = useMutation(LOGIN_USER);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => { 
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const email = data.get("email");
-        const password = data.get("password")
-
-
-        console.log(`email: ${email} | password: ${password}`)
-    }
+        const email = data.get("email").trim().toLowerCase();
+        const password = data.get("password").trim();
+      
+        console.log(`email: ${email} | password: ${password}`);
+      
+        try {
+          const { data: userData } = await login({
+            variables: { email, password }
+          });
+      
+      
+          if (userData?.login?.token) {
+            console.log("Token received:", userData.login.token);
+            Auth.login(userData.login.token);
+          } else {
+            console.error("Login mutation returned no token.");
+          }
+        } catch (e) {
+          console.error("Login failed:", e);
+          if (e.graphQLErrors) {
+            console.error("GraphQL errors:", e.graphQLErrors);
+          }
+        }
+      };
 
     return(
         <Container
@@ -68,7 +91,7 @@ function Login() {
                                 color="secondary"
                                 label="Email"
                                 name='email'
-                                defaultValue=" "
+                                defaultValue=""
                                 focused
                             />
                         </Box>
@@ -78,7 +101,8 @@ function Login() {
                                 color='secondary'
                                 label="Password"
                                 name="password"
-                                defaultValue=" "
+                                type="password"
+                                defaultValue=""
                                 focused
                             />
                         </Box>
@@ -97,7 +121,7 @@ function Login() {
                         </Box>
                         <Box sx={{mb:2}}>
                             Don't have an account?<br></br>
-                            Sign up <Link href='/'>Here!</Link>
+                            Sign up <Link href='/NewUser'>Here!</Link>
                         </Box>
                     </Box>
                 </Paper>

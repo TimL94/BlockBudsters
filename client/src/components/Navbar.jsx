@@ -23,14 +23,21 @@ import {
   ContactPhone as ContactIcon,
   Login as LoginIcon
 } from '@mui/icons-material';
+import Auth from '../utils/auth';
 
 import logo from  '../assets/images/BlockBudsters.png';
+
 
 const pages = [ 'Menu', 'Contact', 'Login'] ;
 
 function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
   };
 
 
@@ -60,6 +67,7 @@ function ResponsiveAppBar() {
             </ListItemText>
           </Button>
         </ListItem>
+        {Auth.loggedIn() ? 
         <ListItem disablePadding>
           <Button 
             sx={buttonStyles}
@@ -74,7 +82,9 @@ function ResponsiveAppBar() {
               Order Online
             </ListItemText>
           </Button>
-        </ListItem>
+        </ListItem> :
+        null
+        }
       </List>
 
       <Divider />
@@ -99,6 +109,7 @@ function ResponsiveAppBar() {
             
       <Divider />
       <List>
+        {!Auth.loggedIn() ?
         <ListItem disablePadding>
             <Button 
             sx={buttonStyles}
@@ -113,7 +124,22 @@ function ResponsiveAppBar() {
                 Login
               </ListItemText>
             </Button>
+        </ListItem> :
+        <ListItem>
+          <Button 
+            sx={buttonStyles}
+            onClick={logout}
+            width='100%'
+          >
+              <ListItemIcon>
+                <LoginIcon />
+              </ListItemIcon>
+              <ListItemText>
+                Logout
+              </ListItemText>
+            </Button>
         </ListItem>
+  }   
       </List>
     </Box>
   );

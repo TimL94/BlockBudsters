@@ -9,6 +9,33 @@ import Order from './pages/Order.jsx'
 import Booking from './pages/Booking.jsx'
 import Contact from './pages/Contact.jsx'
 import Login from './pages/Login.jsx'
+import NewUser from './pages/NewUser.jsx'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: '/graphql'
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 const router = createBrowserRouter([
   {
@@ -44,10 +71,18 @@ const router = createBrowserRouter([
         path: '/Login',
         element: <Login />
       },
+      {
+        path: '/NewUser',
+        element: <NewUser />
+      }
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router} />
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
+  </React.StrictMode>
 )
