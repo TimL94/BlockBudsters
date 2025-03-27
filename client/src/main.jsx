@@ -17,6 +17,7 @@ import {
   createHttpLink
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -48,20 +49,12 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/Events',
-        element: <Events />
-      },
-      {
         path: '/Menu',
         element: <Menu />
       },
       {
         path: '/Order',
-        element: <Order />
-      },
-      {
-        path: '/Booking',
-        element: <Booking />
+        element: Auth.loggedIn() ? <Order /> : <Login />
       },
       {
         path: '/Contact',
@@ -69,11 +62,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/Login',
-        element: <Login />
+        element: Auth.loggedIn() ? <Home /> : <Login />
       },
       {
         path: '/NewUser',
-        element: <NewUser />
+        element: Auth.loggedIn() ? <Home /> : <NewUser />
       }
     ]
   }
