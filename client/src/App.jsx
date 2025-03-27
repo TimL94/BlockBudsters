@@ -71,7 +71,7 @@ function App() {
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10%' }}>
         <Card 
         sx={{ 
-          maxWidth: 400, 
+          maxWidth: '75vw', 
           p: 2, 
           border: 2,
           borderRadius: 2.5
