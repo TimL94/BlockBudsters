@@ -70,7 +70,6 @@ import {
             <Typography sx={{ mt: 2 }}>
               <h2>Create New Account</h2>
             </Typography>
-            Sign up here!
             <Box
               component="form"
               sx={{
@@ -91,6 +90,25 @@ import {
                   name="email"
                   type="email"
                   focused
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#006400', // dark green
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#004d00',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#006400',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#006400',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#006400',
+                    },
+                  }}
                 />
               </Box>
               <Box>
@@ -101,6 +119,25 @@ import {
                   name="password"
                   type="password"
                   focused
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#006400', // dark green
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#004d00',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#006400',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#006400',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#006400',
+                    },
+                  }}
                 />
               </Box>
               <Box>
@@ -111,6 +148,25 @@ import {
                   name="password2"
                   type="password"
                   focused
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#006400', // dark green
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#004d00',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#006400',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#006400',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#006400',
+                    },
+                  }}
                 />
               </Box>
   
@@ -126,7 +182,11 @@ import {
                   sx={{
                     width: "40%",
                     m: "auto",
-                    borderRadius: 5
+                    borderRadius: 5,
+                    backgroundColor: '#006400',
+                    '&:hover': {
+                               backgroundColor: '#004d00', // even darker on hover
+                                },
                   }}
                   type="submit"
                 >

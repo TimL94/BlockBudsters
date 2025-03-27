@@ -74,7 +74,6 @@ function Login() {
                     <h2>
                         Login
                     </h2>
-                    Sign in here!
                     </Typography>
                     <Box
                         component="form"
@@ -96,6 +95,25 @@ function Login() {
                                 name='email'
                                 defaultValue=""
                                 focused
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                      '& fieldset': {
+                                        borderColor: '#006400', // dark green
+                                      },
+                                      '&:hover fieldset': {
+                                        borderColor: '#004d00',
+                                      },
+                                      '&.Mui-focused fieldset': {
+                                        borderColor: '#006400',
+                                      },
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                      color: '#006400',
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                      color: '#006400',
+                                    },
+                                  }}
                             />
                         </Box>
                         <Box>
@@ -107,6 +125,25 @@ function Login() {
                                 type="password"
                                 defaultValue=""
                                 focused
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                      '& fieldset': {
+                                        borderColor: '#006400', // dark green
+                                      },
+                                      '&:hover fieldset': {
+                                        borderColor: '#004d00',
+                                      },
+                                      '&.Mui-focused fieldset': {
+                                        borderColor: '#006400',
+                                      },
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                      color: '#006400',
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                      color: '#006400',
+                                    },
+                                  }}
                             />
                         </Box>
                         <Box sx={{mt:2, mb:3}}>
@@ -115,7 +152,11 @@ function Login() {
                                 sx={{
                                     width:'40%',
                                     m: 'auto',
-                                    borderRadius:5
+                                    borderRadius:5,
+                                    backgroundColor: '#006400',
+                                    '&:hover': {
+                                            backgroundColor: '#004d00', // even darker on hover
+                                    },
                                 }} 
                                 type="submit"
                             >
