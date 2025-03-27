@@ -66,7 +66,7 @@ import {
             }
           }}
         >
-          <Paper elevation={24} sx={{ borderRadius: 5, border: 1 }}>
+          <Paper elevation={24} sx={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', borderRadius: 5, border: 1 }}>
             <Typography sx={{ mt: 2 }}>
               <h2>Create New Account</h2>
             </Typography>

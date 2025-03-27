@@ -4,7 +4,8 @@ import {
     Paper,
     TextField,
     Button,
-    Link
+    Link,
+    Typography
 } from "@mui/material";
 import { LOGIN_USER } from "../utils/mutations";
 import { useMutation } from '@apollo/client';
@@ -67,12 +68,14 @@ function Login() {
             >
                 <Paper 
                     elevation={24}
-                    sx={{ borderRadius:5, border:1}}
+                    sx={{ borderRadius:5, border:1, backgroundColor: 'rgba(255, 255, 255, 0.85)',}}
                 >
+                    <Typography sx={{mt:2}}>
                     <h2>
                         Login
                     </h2>
                     Sign in here!
+                    </Typography>
                     <Box
                         component="form"
                         sx={{
