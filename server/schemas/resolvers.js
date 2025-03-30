@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, MenuItem } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 
@@ -7,6 +7,10 @@ const resolvers = {
     Query: {
         users: async () => {
             return await User.find({})
+        },
+
+        menuItems: async () => {
+            return await MenuItem.find({})
         }
     },
 
@@ -35,8 +39,13 @@ const resolvers = {
 
              return { token, user };
 
-        }
+        },
 
+        addMenuItem: async (parent, { name, category, price, strain }) => {
+            const menuItem = await MenuItem.create({ name, category, price, strain });
+
+            return menuItem
+        }
     }
 };
 
