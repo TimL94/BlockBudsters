@@ -82,10 +82,24 @@ function App() {
             <Typography variant="h5" gutterBottom>
               Are you 21 years of age or older?
             </Typography>
-            <Button onClick={handleYes} variant="contained" color="primary" sx={{ m: 1 }}>
+            <Button onClick={handleYes} variant="contained" sx={{
+               m: 1,
+               backgroundColor: '#006400',
+                                    '&:hover': {
+                                            backgroundColor: '#004d00', // even darker on hover
+                                    },
+              color: 'white',
+               }}>
               Yes
             </Button>
-            <Button onClick={handleNo} variant="outlined" color="secondary" sx={{ m: 1 }}>
+            <Button onClick={handleNo} variant="outlined" sx={{
+               m: 1,
+               backgroundColor: '#006400',
+                                    '&:hover': {
+                                            backgroundColor: '#004d00', // even darker on hover
+                                    },
+              color: 'white',
+               }}>
               No
             </Button>
           </CardContent>
@@ -103,7 +117,7 @@ function App() {
         >
         <Card 
         sx={{ 
-          maxWidth: 400, 
+          maxWidth: '75vw', 
           p: 2,
           border: 2,
           borderRadius: 2.5, 
