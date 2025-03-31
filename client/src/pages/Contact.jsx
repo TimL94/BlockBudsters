@@ -14,21 +14,12 @@ function Contact() {
         <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <Grid container spacing={3} justifyContent='center'>
                 <Grid item  md={6} xs={10}>
-                    <Card 
-                        sx={{
-                            border: 2,
-                            borderRadius: 5,
-                            minHeight: '200px',
-                            mt: 2
-                    }}
-                        raised= 'true'
-                        >
-                        <CardHeader title='Store Contact Info' />
-                        <CardContent>
-                            <Typography variant="body1">Phone: 000-000-0000</Typography>
-                            <Typography variant="body1">Email: test@test.com</Typography>
-                        </CardContent>
-                    </Card>
+                    <Typography sx={{ mb: 2, mt: 2, color:'white' }}>
+                        <h2>Contact Information</h2>
+                    </Typography>
+                <Typography variant="body1">Phone: 000-000-0000</Typography>
+                <Typography variant="body1">Email: test@test.com</Typography>
+                <Typography variant="body1">Address: 000 somthing ST, 00000, ME</Typography>
                 </ Grid>    
             </Grid>
         </Box>
