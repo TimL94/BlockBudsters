@@ -25,7 +25,10 @@ const menuItemSchema = new Schema(
             },
             required: true,
 
-        }
+        },
+        imageUrl: {
+            type: String
+        },
 
     }
 );

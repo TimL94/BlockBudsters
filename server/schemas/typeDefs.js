@@ -17,7 +17,7 @@ type MenuItem {
     category: String
     price: [Price!]!
     strain: String
-
+    imageUrl: String
 }
 
 type Price {
@@ -36,9 +36,24 @@ type Query {
 }
 
 type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser( email: String!, password: String!, admin: Boolean): Auth
-    addMenuItem( name: String!, category: String!, price: [PriceInput!]!, strain: String! ): MenuItem
+    login(
+        email: String!, 
+        password: String!
+    ): Auth
+
+    addUser( 
+        email: String!, 
+        password: String!, 
+        admin: Boolean
+    ): Auth
+
+    addMenuItem( 
+        name: String!, 
+        category: String!, 
+        price: [PriceInput!]!, 
+        strain: String!,
+        imageUrl: String!
+    ): MenuItem
 }
 `;
 

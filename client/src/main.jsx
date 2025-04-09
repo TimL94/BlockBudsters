@@ -10,6 +10,7 @@ import Booking from './pages/Booking.jsx'
 import Contact from './pages/Contact.jsx'
 import Login from './pages/Login.jsx'
 import NewUser from './pages/NewUser.jsx'
+import Inventory from './pages/Inventory.jsx'
 import {
   ApolloClient,
   InMemoryCache,
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: '/NewUser',
         element: Auth.loggedIn() ? <Home /> : <NewUser />
+      },
+      {
+        path: '/Inventory',
+        element: /*Auth.loggedIn() && Auth.getProfile().data.admin ?*/ <Inventory />/* : <Login />*/
       }
     ]
   }
