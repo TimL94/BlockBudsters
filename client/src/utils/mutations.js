@@ -16,3 +16,31 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_MENU_ITEM = gql`
+  mutation addMenuItem(
+    $name: String!
+    $category: String!
+    $price: [PriceInput!]!
+    $strain: String!
+    $imageUrl: String!
+  ) {
+    addMenuItem(
+      name: $name
+      category: $category
+      price: $price
+      strain: $strain
+      imageUrl: $imageUrl
+    ) {
+      _id
+      name
+      category
+      price {
+        quantity
+        amount
+      }
+      strain
+      imageUrl
+    }
+  }
+`;
+
