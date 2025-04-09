@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import './app.css';
 import theme from './utils/theme.js';
+import DebugConsole from './components/debug.jsx'
 
 
 
@@ -142,6 +143,7 @@ function App() {
           <Outlet sx={{ mb:20 }}/>
         </div>
         <Footer/>
+        <DebugConsole/>
       </Box>
     </ThemeProvider>
   )
