@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from './pages/Home.jsx'
-import Events from './pages/Events.jsx'
+
 import Menu from './pages/Menu.jsx'
 import Order from './pages/Order.jsx'
 import Booking from './pages/Booking.jsx'
