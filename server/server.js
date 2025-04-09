@@ -19,7 +19,7 @@ const startApolloServer = async () => {
 
   // Enable CORS before routes
   app.use(cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000"
+    origin: "*"
   }));
   
   app.use(express.urlencoded({ extended: false }));
