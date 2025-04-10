@@ -38,7 +38,7 @@ function Inventory() {
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
 
   const handleImageChange = async (e) => {
-    /*const file = e.target.files[0];
+    const file = e.target.files[0];
     if (!file) return;
 
     console.log("File name:", file.name);
@@ -68,12 +68,6 @@ function Inventory() {
 
     // Use the converted file if successful; otherwise fall back to original
     setImageFile(converted || file);
-    */
-    const file = e.target.files[0];
-    if (!file) return;
-    console.log("File captured:", file);
-    // Bypass conversion and set the file directly
-    setImageFile(file);
   };
 
   const handlePriceChange = (index, field, value) => {
@@ -90,7 +84,10 @@ function Inventory() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-
+      const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
+      console.log("Using API URL:", apiUrl);
+      const uploadEndpoint = `${apiUrl}/api/upload`;
+      console.log("Uploading to:", uploadEndpoint);
       // Note: Ensure this endpoint is reachable from your environment
       const response = await fetch("http://localhost:3001/api/upload", {
         method: "POST",
