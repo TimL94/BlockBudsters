@@ -39,8 +39,16 @@ function Inventory() {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
+    if (!file) return;
 
-    if (file) {
+    console.log("File name:", file.name);
+    console.log("File type:", file.type);
+    console.log("File size:", file.size);
+
+    let converted = null;
+
+    // Try converting anything that's not image/jpeg
+    if (file.type !== "image/jpeg") {
       try {
         const jpegBlob = await heic2any({
           blob: file,
@@ -48,18 +56,18 @@ function Inventory() {
           quality: 0.9,
         });
 
-        const convertedFile = new File(
+        converted = new File(
           [jpegBlob],
           file.name.replace(/\.[^.]+$/, ".jpg"),
           { type: "image/jpeg" }
         );
-
-        setImageFile(convertedFile);
       } catch (err) {
-        console.error("Image conversion failed:", err);
-        alert("Failed to convert image. Please try another file.");
+        console.warn("Conversion failed, falling back to original file:", err);
       }
     }
+
+    // Use the converted file if successful, otherwise fall back to original
+    setImageFile(converted || file);
   };
 
   const handlePriceChange = (index, field, value) => {
