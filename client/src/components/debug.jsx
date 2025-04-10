@@ -24,10 +24,9 @@ const DebugConsole = () => {
 
   return (
     <div style={{
-      position: 'fixed', bottom: 0, left: 0, right: 0,
-      maxHeight: '200px', overflowY: 'scroll',
+      maxHeight: '500px', overflowY: 'scroll',
       backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'white',
-      fontSize: '12px', zIndex: 9999, padding: '5px'
+      fontSize: '12px', padding: '5px', minHeight: '300px',
     }}>
       {logs.map((log, index) => (
         <div key={index}>{log}</div>

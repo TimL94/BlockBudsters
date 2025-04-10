@@ -22,36 +22,43 @@ const categories = [
 ];
 const strains = ["Indica", "Sativa", "Hybrid"];
 
+const buttonStyle = {
+  width: '40%',
+  m: 'auto',
+  borderRadius: 5,
+  backgroundColor: '#006400',
+  '&:hover': {
+    backgroundColor: '#004d00',
+  },
+};
+
 function Inventory() {
-  // Mutation should be updated to accept imageUrl as well.
   const [addMenuItem] = useMutation(ADD_MENU_ITEM);
   const [imageFile, setImageFile] = useState(null);
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-  
-    if (file && file.type === "image/heic") {
+
+    if (file) {
       try {
         const jpegBlob = await heic2any({
           blob: file,
           toType: "image/jpeg",
           quality: 0.9,
         });
-  
+
         const convertedFile = new File(
           [jpegBlob],
-          file.name.replace(/\.heic$/i, ".jpg"),
+          file.name.replace(/\.[^.]+$/, ".jpg"),
           { type: "image/jpeg" }
         );
-  
+
         setImageFile(convertedFile);
       } catch (err) {
-        console.error("HEIC conversion failed:", err);
-        alert("Failed to convert HEIC image. Please try another file.");
+        console.error("Image conversion failed:", err);
+        alert("Failed to convert image. Please try another file.");
       }
-    } else {
-      setImageFile(file);
     }
   };
 
@@ -65,7 +72,6 @@ function Inventory() {
     setPriceInput([...priceInput, { quantity: "", amount: "" }]);
   };
 
-  // Function to upload the image using our REST endpoint
   const uploadImageToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -96,13 +102,11 @@ function Inventory() {
         amount: parseFloat(p.amount)
       }));
 
-      // Upload image to Cloudinary and get its URL
       let imageUrl = "";
       if (imageFile) {
         imageUrl = await uploadImageToCloudinary(imageFile);
       }
 
-      // Call GraphQL mutation passing the imageUrl along with other data
       const { data } = await addMenuItem({
         variables: {
           name,
@@ -165,7 +169,7 @@ function Inventory() {
               />
             </Box>
           ))}
-          <Button variant="outlined" onClick={addPriceField}>
+          <Button variant="contained" onClick={addPriceField} sx={buttonStyle}>
             Add Price Tier
           </Button>
           <input
@@ -174,7 +178,7 @@ function Inventory() {
             onChange={handleImageChange}
             required
           />
-          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+          <Button type="submit" variant="contained" sx={{ ...buttonStyle, mt: 2 }}>
             Submit
           </Button>
         </Box>
