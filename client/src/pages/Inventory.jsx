@@ -84,7 +84,10 @@ function Inventory() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-
+      const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
+      console.log("Using API URL:", apiUrl);
+      const uploadEndpoint = `${apiUrl}/api/upload`;
+      console.log("Uploading to:", uploadEndpoint);
       // Note: Ensure this endpoint is reachable from your environment
       const response = await fetch("http://localhost:3001/api/upload", {
         method: "POST",
