@@ -1,8 +1,9 @@
 import { Card, Container, Grid, CardHeader, CardContent, Typography, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
+import auth from "../utils/auth.js";
 
 
-function Home() {
+function Home() {          
     return(
         <Container
             sx={{
@@ -39,7 +40,7 @@ function Home() {
                                     borderColor: "white",
                                     }
                                 }}  
-                                >Existing Customer?
+                                >Existing Customer?{isadmin}
                                 </Divider>
                     <Typography variant="body1" sx={{ m: 3 }}>View our menu <Link to='/Menu' style={{ textDecoration: 'underline' }}>Here!</Link></Typography>
                 </Grid>

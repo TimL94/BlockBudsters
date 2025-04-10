@@ -68,7 +68,7 @@ function Login() {
             >
                 <Paper 
                     elevation={24}
-                    sx={{ borderRadius:5, border:1, backgroundColor: 'rgba(255, 255, 255, 0.85)',}}
+                    sx={{ borderRadius:5, border:1, backgroundColor: 'rgba(255, 255, 255, 0.85)', opacity: 0.85}}
                 >
                     <Typography sx={{mt:2}}>
                     <h2>

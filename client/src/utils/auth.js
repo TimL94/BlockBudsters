@@ -37,6 +37,16 @@ class Auth {
         return token && !this.isTokenExpired(token) ? true : false;
     }
 
+    isAdmin() {
+        const token = this.getToken();
+        if (token) {
+            const decoded = this.getProfile();
+            return decoded.data.admin;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 export default new Auth();
