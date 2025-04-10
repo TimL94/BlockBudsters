@@ -38,7 +38,7 @@ function Inventory() {
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
 
   const handleImageChange = async (e) => {
-    /*const file = e.target.files[0];
+    const file = e.target.files[0];
     if (!file) return;
 
     console.log("File name:", file.name);
@@ -68,12 +68,6 @@ function Inventory() {
 
     // Use the converted file if successful; otherwise fall back to original
     setImageFile(converted || file);
-    */
-    const file = e.target.files[0];
-    if (!file) return;
-    console.log("File captured:", file);
-    // Bypass conversion and set the file directly
-    setImageFile(file);
   };
 
   const handlePriceChange = (index, field, value) => {
