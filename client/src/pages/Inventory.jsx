@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
+import heic2any from "heic2any";
 
 const categories = [
   "Flower",
@@ -27,8 +28,31 @@ function Inventory() {
   const [imageFile, setImageFile] = useState(null);
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
 
-  const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]);
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+  
+    if (file && file.type === "image/heic") {
+      try {
+        const jpegBlob = await heic2any({
+          blob: file,
+          toType: "image/jpeg",
+          quality: 0.9,
+        });
+  
+        const convertedFile = new File(
+          [jpegBlob],
+          file.name.replace(/\.heic$/i, ".jpg"),
+          { type: "image/jpeg" }
+        );
+  
+        setImageFile(convertedFile);
+      } catch (err) {
+        console.error("HEIC conversion failed:", err);
+        alert("Failed to convert HEIC image. Please try another file.");
+      }
+    } else {
+      setImageFile(file);
+    }
   };
 
   const handlePriceChange = (index, field, value) => {

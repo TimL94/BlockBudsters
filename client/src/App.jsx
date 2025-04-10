@@ -140,10 +140,13 @@ function App() {
       <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh', color:'white'}} boxSizing='border-box'>
         <Navbar />
         <div>
+          <DebugConsole/>
+        </div>
+        <div>
           <Outlet sx={{ mb:20 }}/>
         </div>
         <Footer/>
-        <DebugConsole/>
+        
       </Box>
     </ThemeProvider>
   )
