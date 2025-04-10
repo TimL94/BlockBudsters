@@ -5,7 +5,7 @@ const theme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: 'white', // ← default color for all dividers
+          borderColor: 'black', // ← default color for all dividers
         },
       },
     },

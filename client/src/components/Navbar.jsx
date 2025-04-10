@@ -141,9 +141,9 @@ function ResponsiveAppBar() {
               </ListItemText>
             </Button>
         </ListItem> :
-        <ListItem>
+        <ListItem disablePadding>
           <Button 
-            sx={buttonStyles}
+            sx={{ ...buttonStyles}}
             onClick={logout}
             width='100%'
           >
