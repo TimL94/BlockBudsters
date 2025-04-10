@@ -44,6 +44,8 @@ function Inventory() {
     console.log("File name:", file.name);
     console.log("File type:", file.type);
     console.log("File size:", file.size);
+    console.log("File instanceof Blob?", file instanceof Blob);
+console.log("File instanceof File?", file instanceof File);
 
     let converted = null;
 
@@ -158,14 +160,14 @@ function Inventory() {
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
           <TextField name="name" label="Name" required />
-          <TextField name="category" label="Category" required select>
+          <TextField name="category" label="Category" required select defaultValue="">
             {categories.map((cat) => (
               <MuiMenuItem key={cat} value={cat}>
                 {cat}
               </MuiMenuItem>
             ))}
           </TextField>
-          <TextField name="strain" label="Strain" required select>
+          <TextField name="strain" label="Strain" required select defaultValue="">
             {strains.map((s) => (
               <MuiMenuItem key={s} value={s}>
                 {s}
