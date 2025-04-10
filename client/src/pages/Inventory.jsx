@@ -114,6 +114,7 @@ function Inventory() {
       if (imageFile) {
         imageUrl = await uploadImageToCloudinary(imageFile);
       }
+      
 
       const { data } = await addMenuItem({
         variables: {
