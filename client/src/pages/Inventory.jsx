@@ -41,12 +41,12 @@ function Inventory() {
     const file = e.target.files[0];
     if (!file) return;
 
-    console.log("File name:", file.name);
-    console.log("File type:", file.type);
-    console.log("File size:", file.size);
-    console.log("File instanceof Blob?", file instanceof Blob);
-    console.log("File instanceof File?", file instanceof File);
-    console.log("File:", file);
+    // console.log("File name:", file.name);
+    // console.log("File type:", file.type);
+    // console.log("File size:", file.size);
+    // console.log("File instanceof Blob?", file instanceof Blob);
+    // console.log("File instanceof File?", file instanceof File);
+    // console.log("File:", file);
 
     let converted = null;
 
@@ -92,7 +92,7 @@ function Inventory() {
   
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
-      console.log("Uploading to:", uploadEndpoint);
+      // console.log("Uploading to:", uploadEndpoint);
   
       const response = await fetch(uploadEndpoint, {
         method: "POST",

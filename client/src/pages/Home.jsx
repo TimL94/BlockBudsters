@@ -24,23 +24,46 @@ function Home() {
                                     }
                                 }} 
                                 >Medical Cannabis</Divider></Typography>
-                    <Typography variant="body1" sx={{ mb: 20, mt: 10, fontStyle:'italic' }}>Dedicated to providing our clients with the highest quality medicinal products</Typography>
-                    <Divider sx={{ 
-                                fontStyle:'italic', 
-                                "&::before, &::after": {
-                                    borderColor: "white",
-                                    }
-                                }} 
+                    <Typography 
+                        variant="body1" 
+                        sx={{ 
+                            mb: 20, 
+                            mt: 10, 
+                            fontStyle:'italic' 
+                            }}
+                            >
+                                Dedicated to providing our clients with the highest quality medicinal products
+                    </Typography>
+
+                    <Divider 
+                        sx={{ 
+                            fontStyle:'italic', 
+                            "&::before, &::after": {
+                                borderColor: "white",
+                                }
+                            }} 
                                 >New Customer?
-                                </Divider>
-                    <Typography variant="body1" sx={{ m: 3 }}>Create a new account <Link to='/NewUser' style={{ textDecoration: 'underline'}}>Here!</Link></Typography>
+                    </Divider>
+                    <Typography 
+                        variant="body1" 
+                        sx={{ m: 3 }}
+                        >
+                            Create a new account 
+                            <Link 
+                                to='/NewUser' 
+                                style={{ textDecoration: 'underline'}}
+                                >
+                                    Here!
+                            </Link>
+                    </Typography>
                     <Divider sx={{ 
                                 fontStyle:'italic', 
                                 "&::before, &::after": {
                                     borderColor: "white",
                                     }
                                 }}  
-                                >Existing Customer?{isadmin}
+                                >
+                                    Existing Customer?
                                 </Divider>
                     <Typography variant="body1" sx={{ m: 3 }}>View our menu <Link to='/Menu' style={{ textDecoration: 'underline' }}>Here!</Link></Typography>
                 </Grid>
