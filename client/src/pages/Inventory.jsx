@@ -23,13 +23,13 @@ const categories = [
 const strains = ["Indica", "Sativa", "Hybrid"];
 
 const buttonStyle = {
-  width: '40%',
-  m: 'auto',
+  width: "40%",
+  m: "auto",
   borderRadius: 5,
-  backgroundColor: '#006400',
-  '&:hover': {
-    backgroundColor: '#004d00',
-  },
+  backgroundColor: "#006400",
+  "&:hover": {
+    backgroundColor: "#004d00"
+  }
 };
 
 function Inventory() {
@@ -47,13 +47,13 @@ function Inventory() {
 
     let converted = null;
 
-    // Try converting anything that's not image/jpeg
+    // Try converting anything that's not image/jpeg to JPEG
     if (file.type !== "image/jpeg") {
       try {
         const jpegBlob = await heic2any({
           blob: file,
           toType: "image/jpeg",
-          quality: 0.9,
+          quality: 0.9
         });
 
         converted = new File(
@@ -66,7 +66,7 @@ function Inventory() {
       }
     }
 
-    // Use the converted file if successful, otherwise fall back to original
+    // Use the converted file if successful; otherwise fall back to original
     setImageFile(converted || file);
   };
 
@@ -81,20 +81,29 @@ function Inventory() {
   };
 
   const uploadImageToCloudinary = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
 
-    const response = await fetch("http://localhost:3001/api/upload", {
-      method: "POST",
-      body: formData,
-    });
+      // Note: Ensure this endpoint is reachable from your environment
+      const response = await fetch("http://localhost:3001/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      console.log("Response status:", response.status);
 
-    if (!response.ok) {
-      throw new Error("Image upload failed");
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Upload error response:", errorText);
+        throw new Error("Image upload failed");
+      }
+      const data = await response.json();
+      console.log("Cloudinary response:", data);
+      return data.url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
     }
-
-    const data = await response.json();
-    return data.url;
   };
 
   const handleSubmit = async (event) => {
@@ -114,7 +123,6 @@ function Inventory() {
       if (imageFile) {
         imageUrl = await uploadImageToCloudinary(imageFile);
       }
-      
 
       const { data } = await addMenuItem({
         variables: {
@@ -166,14 +174,18 @@ function Inventory() {
               <TextField
                 label="Quantity"
                 value={price.quantity}
-                onChange={(e) => handlePriceChange(idx, "quantity", e.target.value)}
+                onChange={(e) =>
+                  handlePriceChange(idx, "quantity", e.target.value)
+                }
                 required
               />
               <TextField
                 label="Amount"
                 type="number"
                 value={price.amount}
-                onChange={(e) => handlePriceChange(idx, "amount", e.target.value)}
+                onChange={(e) =>
+                  handlePriceChange(idx, "amount", e.target.value)
+                }
                 required
               />
             </Box>
