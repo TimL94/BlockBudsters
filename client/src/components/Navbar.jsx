@@ -85,6 +85,22 @@ function ResponsiveAppBar() {
         </ListItem> :
         null
         }
+        {Auth.loggedIn() && Auth.isAdmin() ? 
+          <ListItem disablePadding>
+          <Button 
+            sx={buttonStyles}
+            component={Link}
+            href='/Inventory'
+            width='100%'
+          >
+            <ListItemIcon>
+              <EventIcon />
+            </ListItemIcon>
+            <ListItemText>
+              Inventory
+            </ListItemText>
+          </Button>
+        </ListItem> : null}
       </List>
 
       <Divider />

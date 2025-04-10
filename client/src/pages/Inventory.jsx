@@ -80,7 +80,7 @@ function Inventory() {
   };
 
   const addPriceField = () => {
-    setPriceInput([...priceInput, { quantity: "", amount: "" }]);
+    setPriceInput([...priceInput, { quantity: "", Amount: "" }]);
   };
 
   const uploadImageToCloudinary = async (file) => {
@@ -153,8 +153,8 @@ function Inventory() {
   };
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Paper elevation={10} sx={{ p: 4, borderRadius: 5 }}>
+    <Container sx={{ mt: 4, maxWidth: 350 }}>
+      <Paper elevation={10} sx={{ p: 4, borderRadius: 5, opacity: 0.85 }}>
         <Typography variant="h5" mb={2}>
           Add New Menu Item
         </Typography>
@@ -190,7 +190,7 @@ function Inventory() {
                 required
               />
               <TextField
-                label="Amount"
+                label="Price"
                 type="number"
                 value={price.amount}
                 onChange={(e) =>
@@ -200,15 +200,34 @@ function Inventory() {
               />
             </Box>
           ))}
-          <Button variant="contained" onClick={addPriceField} sx={buttonStyle}>
+          <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
             Add Price Tier
           </Button>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
+          <Box textAlign="center">
+            <label htmlFor="upload-image">
+              <input
+                accept="image/*"
+                id="upload-image"
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleImageChange}
+                required
+              />
+              <Button
+                variant="contained"
+                component="span"
+                sx={{ ...buttonStyle, width: "85%", mt: 1 }}
+              >
+                Choose Image
+              </Button>
+            </label>
+            {imageFile && (
+              <Typography variant="body2" mt={1} color="text.secondary">
+                Image selected
+              </Typography>
+            )}
+          </Box>
+
           <Button type="submit" variant="contained" sx={{ ...buttonStyle, mt: 2 }}>
             Submit
           </Button>

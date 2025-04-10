@@ -71,7 +71,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/Inventory',
-        element: /*Auth.loggedIn() && Auth.getProfile().data.admin ?*/ <Inventory />/* : <Login />*/
+        element: Auth.loggedIn() && Auth.isAdmin() ? <Inventory /> : <Home />
       }
     ]
   }
