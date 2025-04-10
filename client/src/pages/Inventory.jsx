@@ -45,7 +45,8 @@ function Inventory() {
     console.log("File type:", file.type);
     console.log("File size:", file.size);
     console.log("File instanceof Blob?", file instanceof Blob);
-console.log("File instanceof File?", file instanceof File);
+    console.log("File instanceof File?", file instanceof File);
+    console.log("File:", file);
 
     let converted = null;
 
@@ -85,23 +86,27 @@ console.log("File instanceof File?", file instanceof File);
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
-      formData.append("file", file);
+  
+      const blob = new Blob([file], { type: file.type });
+      formData.append("file", blob, file.name);
+  
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
-      console.log("Using API URL:", apiUrl);
       const uploadEndpoint = `${apiUrl}/api/upload`;
       console.log("Uploading to:", uploadEndpoint);
-      // Note: Ensure this endpoint is reachable from your environment
-      const response = await fetch("http://localhost:3001/api/upload", {
+  
+      const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
       });
+  
       console.log("Response status:", response.status);
-
+  
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Upload error response:", errorText);
         throw new Error("Image upload failed");
       }
+  
       const data = await response.json();
       console.log("Cloudinary response:", data);
       return data.url;
