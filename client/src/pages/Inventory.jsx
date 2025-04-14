@@ -20,7 +20,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
 
-const categories = ["Flower", "Pre Rolls", "Concentrates", "Edibles", "Limited", "Special"];
+const categories = ["Flower", "Pre Rolls", "Concentrates", "Edibles", "Limited", "Special", "Seeds"];
 const strains = ["Indica", "Sativa", "Hybrid"];
 const effects = [
   "Sleep", "Energy", "Focus", "Anxiety", "Depression",
@@ -144,6 +144,7 @@ function Inventory() {
 
       console.log("Menu item added:", data);
       alert("Menu item successfully added!");
+      window.location.reload(); // Reload the page to see the new item
     } catch (error) {
       console.error("Upload error:", error);
       alert("Error adding menu item. Check console for details.");

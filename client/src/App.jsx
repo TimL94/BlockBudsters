@@ -139,7 +139,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box sx={{p:0, m:0, display:'flex', flexDirection:'column', height:'80vh', color:'white'}} boxSizing='border-box'>
         <Navbar />
-        <DebugConsole />
         <div>
           <Outlet sx={{ mb:20 }}/>
         </div>
