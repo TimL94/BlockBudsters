@@ -6,8 +6,10 @@ import {
   TextField,
   Button,
   Typography,
-  MenuItem as MuiMenuItem
+  MenuItem as MuiMenuItem,
+  IconButton
 } from "@mui/material";
+import { RemoveCircleOutline } from "@mui/icons-material";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
@@ -41,16 +43,8 @@ function Inventory() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // console.log("File name:", file.name);
-    // console.log("File type:", file.type);
-    // console.log("File size:", file.size);
-    // console.log("File instanceof Blob?", file instanceof Blob);
-    // console.log("File instanceof File?", file instanceof File);
-    // console.log("File:", file);
-
     let converted = null;
 
-    // Try converting anything that's not image/jpeg to JPEG
     if (file.type !== "image/jpeg") {
       try {
         const jpegBlob = await heic2any({
@@ -69,7 +63,6 @@ function Inventory() {
       }
     }
 
-    // Use the converted file if successful; otherwise fall back to original
     setImageFile(converted || file);
   };
 
@@ -80,33 +73,38 @@ function Inventory() {
   };
 
   const addPriceField = () => {
-    setPriceInput([...priceInput, { quantity: "", Amount: "" }]);
+    setPriceInput([...priceInput, { quantity: "", amount: "" }]);
+  };
+
+  const removePriceField = (index) => {
+    const updated = priceInput.filter((_, i) => i !== index);
+    setPriceInput(updated);
   };
 
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
-  
       const blob = new Blob([file], { type: file.type });
       formData.append("file", blob, file.name);
-  
+
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
-      // console.log("Uploading to:", uploadEndpoint);
-  
+      console.log("API URL:", apiUrl);
+      console.log("Upload endpoint:", uploadEndpoint);
+
       const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
       });
-  
+
       console.log("Response status:", response.status);
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Upload error response:", errorText);
         throw new Error("Image upload failed");
       }
-  
+
       const data = await response.json();
       console.log("Cloudinary response:", data);
       return data.url;
@@ -180,7 +178,7 @@ function Inventory() {
             ))}
           </TextField>
           {priceInput.map((price, idx) => (
-            <Box key={idx} display="flex" gap={2}>
+            <Box key={idx} display="flex" alignItems="center" gap={1}>
               <TextField
                 label="Quantity"
                 value={price.quantity}
@@ -198,6 +196,11 @@ function Inventory() {
                 }
                 required
               />
+              {priceInput.length > 1 && (
+                <IconButton color="error" onClick={() => removePriceField(idx)}>
+                  <RemoveCircleOutline />
+                </IconButton>
+              )}
             </Box>
           ))}
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
@@ -227,7 +230,6 @@ function Inventory() {
               </Typography>
             )}
           </Box>
-
           <Button type="submit" variant="contained" sx={{ ...buttonStyle, mt: 2 }}>
             Submit
           </Button>
