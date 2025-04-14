@@ -145,7 +145,7 @@ function Inventory() {
           strain,
           price: formattedPrice,
           imageUrl,
-          effect: selectedEffects
+          effect: Array.isArray(selectedEffects) ? selectedEffects : [],
         }
       });
 
@@ -155,6 +155,14 @@ function Inventory() {
       console.error("Upload error:", error);
       alert("Error adding menu item. Check console for details.");
     }
+
+    console.log("Selected effects:", selectedEffects);
+    console.log("Type of effects:", typeof selectedEffects, Array.isArray(selectedEffects));
+    console.log("Price input:", priceInput);
+    console.log("Image file:", imageFile);
+    console.log("Type of image file:", typeof imageFile, imageFile instanceof File);
+    console.log("Price input:", priceInput);
+
   };
 
   return (
@@ -191,7 +199,15 @@ function Inventory() {
               labelId="effect-label"
               multiple
               value={selectedEffects}
-              onChange={(e) => setSelectedEffects(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (Array.isArray(value)) {
+                  setSelectedEffects(value);
+                } else {
+                  console.warn("Unexpected value from Select:", value);
+                  setSelectedEffects([]);
+                }
+              }}
               input={<OutlinedInput label="Effects" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={{ PaperProps: { style: { maxHeight: 140 } } }}
