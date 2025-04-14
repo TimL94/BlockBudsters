@@ -23,7 +23,7 @@ export const ADD_MENU_ITEM = gql`
     $price: [PriceInput!]!
     $strain: String!
     $imageUrl: String!
-    $effect: [String]
+    $effect: String!
   ) {
     addMenuItem(
       name: $name
