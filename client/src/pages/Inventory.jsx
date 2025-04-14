@@ -144,6 +144,7 @@ function Inventory() {
 
       console.log("Menu item added:", data);
       alert("Menu item successfully added!");
+      window.location.reload(); // Reload the page to see the new item
     } catch (error) {
       console.error("Upload error:", error);
       alert("Error adding menu item. Check console for details.");
