@@ -6,21 +6,21 @@ import {
   TextField,
   Button,
   Typography,
-  MenuItem as MuiMenuItem,
-  Select,
-  Checkbox,
-  ListItemText,
-  InputLabel,
-  FormControl
+  MenuItem as MuiMenuItem
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-const categories = ["Flower", "Pre Rolls", "Concentrates", "Edibles", "Limited", "Special"];
+const categories = [
+  "Flower",
+  "Pre Rolls",
+  "Concentrates",
+  "Edibles",
+  "Limited",
+  "Special"
+];
 const strains = ["Indica", "Sativa", "Hybrid"];
-const effectsList = ["Sleep", "Energy", "Focus", "Anxiety", "Depression", "Pain", "Stress", "Appetite", "Relaxation", "Inflammation"];
 
 const buttonStyle = {
   width: "40%",
@@ -36,7 +36,6 @@ function Inventory() {
   const [addMenuItem] = useMutation(ADD_MENU_ITEM);
   const [imageFile, setImageFile] = useState(null);
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
-  const [selectedEffects, setSelectedEffects] = useState([]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -76,8 +75,7 @@ function Inventory() {
   };
 
   const removePriceField = (index) => {
-    const updated = [...priceInput];
-    updated.splice(index, 1);
+    const updated = priceInput.filter((_, i) => i !== index);
     setPriceInput(updated);
   };
 
@@ -89,10 +87,14 @@ function Inventory() {
 
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
+      console.log("Upload endpoint:", uploadEndpoint);
+
       const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
       });
+
+      console.log("Response status:", response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -101,6 +103,7 @@ function Inventory() {
       }
 
       const data = await response.json();
+      console.log("Cloudinary response:", data);
       return data.url;
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -133,7 +136,6 @@ function Inventory() {
           strain,
           price: formattedPrice,
           imageUrl,
-          effect: selectedEffects
         }
       });
 
@@ -172,28 +174,8 @@ function Inventory() {
               </MuiMenuItem>
             ))}
           </TextField>
-
-          <FormControl>
-            <InputLabel id="effect-label">Effects</InputLabel>
-            <Select
-              labelId="effect-label"
-              multiple
-              value={selectedEffects}
-              onChange={(e) => setSelectedEffects(e.target.value)}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={{ PaperProps: { style: { maxHeight: 150 } } }}
-            >
-              {effectsList.map((effect) => (
-                <MuiMenuItem key={effect} value={effect}>
-                  <Checkbox checked={selectedEffects.includes(effect)} />
-                  <ListItemText primary={effect} />
-                </MuiMenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
           {priceInput.map((price, idx) => (
-            <Box key={idx} display="flex" gap={2} alignItems="center">
+            <Box key={idx} display="flex" gap={2}>
               <TextField
                 label="Quantity"
                 value={price.quantity}
@@ -211,20 +193,14 @@ function Inventory() {
                 }
                 required
               />
-              {priceInput.length > 1 && (
-                <RemoveCircleIcon
-                  color="error"
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => removePriceField(idx)}
-                />
-              )}
+              <Button onClick={() => removePriceField(idx)} color="error" variant="outlined" sx={{ minWidth: "40px", px: 0 }}>
+                ⛔
+              </Button>
             </Box>
           ))}
-
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
             Add Price Tier
           </Button>
-
           <Box textAlign="center">
             <label htmlFor="upload-image">
               <input
