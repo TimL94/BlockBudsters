@@ -29,6 +29,9 @@ const menuItemSchema = new Schema(
         imageUrl: {
             type: String
         },
+        effect: {
+            type: Array
+        }
 
     }
 );

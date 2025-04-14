@@ -18,6 +18,7 @@ type MenuItem {
     price: [Price!]!
     strain: String
     imageUrl: String
+    effect: [String]
 }
 
 type Price {
@@ -52,7 +53,8 @@ type Mutation {
         category: String!, 
         price: [PriceInput!]!, 
         strain: String!,
-        imageUrl: String!
+        imageUrl: String!,
+        effect: [String]
     ): MenuItem
 }
 `;

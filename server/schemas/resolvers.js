@@ -31,9 +31,9 @@ const resolvers = {
       return { token, user };
     },
 
-    addMenuItem: async (parent, { name, category, price, strain, imageUrl }) => {
+    addMenuItem: async (parent, { name, category, price, strain, imageUrl, effect }) => {
       // Create a new MenuItem with the provided imageUrl and other data.
-      const menuItem = await MenuItem.create({ name, category, price, strain, imageUrl });
+      const menuItem = await MenuItem.create({ name, category, price, strain, imageUrl, effect });
       return menuItem;
     }
   }
