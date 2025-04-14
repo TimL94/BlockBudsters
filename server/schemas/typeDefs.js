@@ -18,7 +18,7 @@ type MenuItem {
     price: [Price!]!
     strain: String
     imageUrl: String
-    effect: [String]
+    effect: String
 }
 
 type Price {
@@ -54,7 +54,7 @@ type Mutation {
         price: [PriceInput!]!, 
         strain: String!,
         imageUrl: String!,
-        effect: [String]
+        effect: String
     ): MenuItem
 }
 `;

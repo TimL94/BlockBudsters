@@ -30,7 +30,7 @@ const menuItemSchema = new Schema(
             type: String
         },
         effect: {
-            type: Array
+            type: String
         }
 
     }
