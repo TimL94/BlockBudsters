@@ -41,16 +41,8 @@ function Inventory() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // console.log("File name:", file.name);
-    // console.log("File type:", file.type);
-    // console.log("File size:", file.size);
-    // console.log("File instanceof Blob?", file instanceof Blob);
-    // console.log("File instanceof File?", file instanceof File);
-    // console.log("File:", file);
-
     let converted = null;
 
-    // Try converting anything that's not image/jpeg to JPEG
     if (file.type !== "image/jpeg") {
       try {
         const jpegBlob = await heic2any({
@@ -69,7 +61,6 @@ function Inventory() {
       }
     }
 
-    // Use the converted file if successful; otherwise fall back to original
     setImageFile(converted || file);
   };
 
@@ -80,38 +71,38 @@ function Inventory() {
   };
 
   const addPriceField = () => {
-    setPriceInput([...priceInput, { quantity: "", Amount: "" }]);
+    setPriceInput([...priceInput, { quantity: "", amount: "" }]);
+  };
+
+  const removePriceField = (index) => {
+    const updated = [...priceInput];
+    updated.splice(index, 1);
+    setPriceInput(updated);
   };
 
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
-  
       const blob = new Blob([file], { type: file.type });
       formData.append("file", blob, file.name);
-  
+
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
-<<<<<<< HEAD
       console.log("Upload endpoint:", uploadEndpoint);
 
-=======
-      // console.log("Uploading to:", uploadEndpoint);
-  
->>>>>>> parent of 0fcc426 (nav bar fix in desktop mode, added functionality to remove price tiers)
       const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
       });
-  
+
       console.log("Response status:", response.status);
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Upload error response:", errorText);
         throw new Error("Image upload failed");
       }
-  
+
       const data = await response.json();
       console.log("Cloudinary response:", data);
       return data.url;
@@ -203,12 +194,14 @@ function Inventory() {
                 }
                 required
               />
-<<<<<<< HEAD
-              <Button onClick={() => removePriceField(idx)} color="error" variant="outlined" sx={{ minWidth: "40px", px: 0 }}>
+              <Button
+                onClick={() => removePriceField(idx)}
+                color="error"
+                variant="outlined"
+                sx={{ minWidth: "40px", px: 0 }}
+              >
                 ⛔
               </Button>
-=======
->>>>>>> parent of 0fcc426 (nav bar fix in desktop mode, added functionality to remove price tiers)
             </Box>
           ))}
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
