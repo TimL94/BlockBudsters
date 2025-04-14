@@ -6,7 +6,13 @@ import {
   TextField,
   Button,
   Typography,
-  MenuItem as MuiMenuItem
+  MenuItem as MuiMenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Checkbox,
+  ListItemText,
+  OutlinedInput
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
@@ -21,7 +27,18 @@ const categories = [
   "Special"
 ];
 const strains = ["Indica", "Sativa", "Hybrid"];
-const effects = ["Sleep", "Energy", "Focus", "Anxiety", "Depression"];
+const effects = [
+  "Sleep",
+  "Energy",
+  "Focus",
+  "Anxiety",
+  "Depression",
+  "Pain",
+  "Stress",
+  "Appetite",
+  "Creativity",
+  "Euphoria"
+];
 
 const buttonStyle = {
   width: "40%",
@@ -37,6 +54,7 @@ function Inventory() {
   const [addMenuItem] = useMutation(ADD_MENU_ITEM);
   const [imageFile, setImageFile] = useState(null);
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
+  const [selectedEffects, setSelectedEffects] = useState([]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -74,12 +92,6 @@ function Inventory() {
     setPriceInput([...priceInput, { quantity: "", amount: "" }]);
   };
 
-  const removePriceField = (index) => {
-    const updated = [...priceInput];
-    updated.splice(index, 1);
-    setPriceInput(updated);
-  };
-
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
@@ -88,6 +100,7 @@ function Inventory() {
 
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
+
       const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
@@ -114,7 +127,6 @@ function Inventory() {
       const name = form.get("name");
       const category = form.get("category");
       const strain = form.get("strain");
-      const effect = form.get("effect");
 
       const formattedPrice = priceInput.map((p) => ({
         quantity: p.quantity,
@@ -133,7 +145,7 @@ function Inventory() {
           strain,
           price: formattedPrice,
           imageUrl,
-          effect
+          effect: selectedEffects
         }
       });
 
@@ -172,33 +184,46 @@ function Inventory() {
               </MuiMenuItem>
             ))}
           </TextField>
-          <TextField name="effect" label="Effect" required select defaultValue="">
-            {effects.map((effect) => (
-              <MuiMenuItem key={effect} value={effect}>
-                {effect}
-              </MuiMenuItem>
-            ))}
-          </TextField>
+
+          <FormControl>
+            <InputLabel id="effect-label">Effects</InputLabel>
+            <Select
+              labelId="effect-label"
+              multiple
+              value={selectedEffects}
+              onChange={(e) => setSelectedEffects(e.target.value)}
+              input={<OutlinedInput label="Effects" />}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={{ PaperProps: { style: { maxHeight: 140 } } }}
+            >
+              {effects.map((effect) => (
+                <MuiMenuItem key={effect} value={effect}>
+                  <Checkbox checked={selectedEffects.indexOf(effect) > -1} />
+                  <ListItemText primary={effect} />
+                </MuiMenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           {priceInput.map((price, idx) => (
-            <Box key={idx} display="flex" gap={2} alignItems="center">
+            <Box key={idx} display="flex" gap={2}>
               <TextField
                 label="Quantity"
                 value={price.quantity}
-                onChange={(e) => handlePriceChange(idx, "quantity", e.target.value)}
+                onChange={(e) =>
+                  handlePriceChange(idx, "quantity", e.target.value)
+                }
                 required
               />
               <TextField
                 label="Price"
                 type="number"
                 value={price.amount}
-                onChange={(e) => handlePriceChange(idx, "amount", e.target.value)}
+                onChange={(e) =>
+                  handlePriceChange(idx, "amount", e.target.value)
+                }
                 required
               />
-              {priceInput.length > 1 && (
-                <Button onClick={() => removePriceField(idx)} color="error">
-                  &#x2716;
-                </Button>
-              )}
             </Box>
           ))}
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
