@@ -95,8 +95,8 @@ function Inventory() {
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
-      const blob = new Blob([file], { type: file.type });
-      formData.append("file", blob, file.name);
+      //const blob = new Blob([file], { type: file.type });
+      formData.append("file", imageFile);
 
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
