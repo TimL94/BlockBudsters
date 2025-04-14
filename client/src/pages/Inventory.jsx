@@ -12,32 +12,19 @@ import {
   FormControl,
   Checkbox,
   ListItemText,
-  OutlinedInput
+  OutlinedInput,
+  IconButton
 } from "@mui/material";
+import { RemoveCircleOutline } from "@mui/icons-material"; // Icon import
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
 
-const categories = [
-  "Flower",
-  "Pre Rolls",
-  "Concentrates",
-  "Edibles",
-  "Limited",
-  "Special"
-];
+const categories = ["Flower", "Pre Rolls", "Concentrates", "Edibles", "Limited", "Special"];
 const strains = ["Indica", "Sativa", "Hybrid"];
 const effects = [
-  "Sleep",
-  "Energy",
-  "Focus",
-  "Anxiety",
-  "Depression",
-  "Pain",
-  "Stress",
-  "Appetite",
-  "Creativity",
-  "Euphoria"
+  "Sleep", "Energy", "Focus", "Anxiety", "Depression",
+  "Pain", "Stress", "Appetite", "Creativity", "Euphoria"
 ];
 
 const buttonStyle = {
@@ -90,6 +77,12 @@ function Inventory() {
 
   const addPriceField = () => {
     setPriceInput([...priceInput, { quantity: "", amount: "" }]);
+  };
+
+  const removePriceField = (index) => {
+    const updated = [...priceInput];
+    updated.splice(index, 1);
+    setPriceInput(updated);
   };
 
   const uploadImageToCloudinary = async (file) => {
@@ -206,7 +199,7 @@ function Inventory() {
           </FormControl>
 
           {priceInput.map((price, idx) => (
-            <Box key={idx} display="flex" gap={2}>
+            <Box key={idx} display="flex" gap={2} alignItems="center">
               <TextField
                 label="Quantity"
                 value={price.quantity}
@@ -224,11 +217,31 @@ function Inventory() {
                 }
                 required
               />
+              {priceInput.length > 1 && (
+                <IconButton
+                  onClick={() => removePriceField(idx)}
+                  sx={{
+                    backgroundColor: 'red',
+                    borderRadius: '50%',
+                    width: 20,
+                    height: 20,
+                    color: 'black',
+                    '&:hover': {
+                      backgroundColor: '#cc0000',
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: '1.5rem', lineHeight: 1 }}>−</Typography>
+                </IconButton>
+              
+              )}
             </Box>
           ))}
+
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
             Add Price Tier
           </Button>
+
           <Box textAlign="center">
             <label htmlFor="upload-image">
               <input
