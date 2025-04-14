@@ -23,6 +23,7 @@ export const ADD_MENU_ITEM = gql`
     $price: [PriceInput!]!
     $strain: String!
     $imageUrl: String!
+    $effect: [String]
   ) {
     addMenuItem(
       name: $name
@@ -30,6 +31,7 @@ export const ADD_MENU_ITEM = gql`
       price: $price
       strain: $strain
       imageUrl: $imageUrl
+      effect: $effect
     ) {
       _id
       name
@@ -40,6 +42,7 @@ export const ADD_MENU_ITEM = gql`
       }
       strain
       imageUrl
+      effect
     }
   }
 `;
