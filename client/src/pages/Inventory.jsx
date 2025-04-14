@@ -6,7 +6,13 @@ import {
   TextField,
   Button,
   Typography,
-  MenuItem as MuiMenuItem
+  MenuItem as MuiMenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Checkbox,
+  ListItemText,
+  OutlinedInput
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
@@ -21,6 +27,18 @@ const categories = [
   "Special"
 ];
 const strains = ["Indica", "Sativa", "Hybrid"];
+const effects = [
+  "Sleep",
+  "Energy",
+  "Focus",
+  "Anxiety",
+  "Depression",
+  "Pain",
+  "Stress",
+  "Appetite",
+  "Creativity",
+  "Euphoria"
+];
 
 const buttonStyle = {
   width: "40%",
@@ -36,13 +54,13 @@ function Inventory() {
   const [addMenuItem] = useMutation(ADD_MENU_ITEM);
   const [imageFile, setImageFile] = useState(null);
   const [priceInput, setPriceInput] = useState([{ quantity: "", amount: "" }]);
+  const [selectedEffects, setSelectedEffects] = useState([]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     let converted = null;
-
     if (file.type !== "image/jpeg") {
       try {
         const jpegBlob = await heic2any({
@@ -74,12 +92,6 @@ function Inventory() {
     setPriceInput([...priceInput, { quantity: "", amount: "" }]);
   };
 
-  const removePriceField = (index) => {
-    const updated = [...priceInput];
-    updated.splice(index, 1);
-    setPriceInput(updated);
-  };
-
   const uploadImageToCloudinary = async (file) => {
     try {
       const formData = new FormData();
@@ -88,14 +100,11 @@ function Inventory() {
 
       const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
       const uploadEndpoint = `${apiUrl}/api/upload`;
-      console.log("Upload endpoint:", uploadEndpoint);
 
       const response = await fetch(uploadEndpoint, {
         method: "POST",
         body: formData,
       });
-
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -104,7 +113,6 @@ function Inventory() {
       }
 
       const data = await response.json();
-      console.log("Cloudinary response:", data);
       return data.url;
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -137,6 +145,7 @@ function Inventory() {
           strain,
           price: formattedPrice,
           imageUrl,
+          effect: selectedEffects
         }
       });
 
@@ -175,6 +184,27 @@ function Inventory() {
               </MuiMenuItem>
             ))}
           </TextField>
+
+          <FormControl>
+            <InputLabel id="effect-label">Effects</InputLabel>
+            <Select
+              labelId="effect-label"
+              multiple
+              value={selectedEffects}
+              onChange={(e) => setSelectedEffects(e.target.value)}
+              input={<OutlinedInput label="Effects" />}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={{ PaperProps: { style: { maxHeight: 140 } } }}
+            >
+              {effects.map((effect) => (
+                <MuiMenuItem key={effect} value={effect}>
+                  <Checkbox checked={selectedEffects.indexOf(effect) > -1} />
+                  <ListItemText primary={effect} />
+                </MuiMenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           {priceInput.map((price, idx) => (
             <Box key={idx} display="flex" gap={2}>
               <TextField
@@ -194,14 +224,6 @@ function Inventory() {
                 }
                 required
               />
-              <Button
-                onClick={() => removePriceField(idx)}
-                color="error"
-                variant="outlined"
-                sx={{ minWidth: "40px", px: 0 }}
-              >
-                ⛔
-              </Button>
             </Box>
           ))}
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
