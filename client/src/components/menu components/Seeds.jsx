@@ -10,20 +10,20 @@ import {
 import { useQuery } from "@apollo/client";
 import { GET_MENU_BY_CATEGORY } from "../../utils/queries";
 
-function Concentrates() {
+function Seeds() {
   const { loading, error, data } = useQuery(GET_MENU_BY_CATEGORY, {
-    variables: { category: "Concentrates" }
+    variables: { category: "Seeds" }
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading concentrates.</p>;
+  if (error) return <p>Error loading Seedss.</p>;
 
   const items = data?.menuByCategory || [];
 
   return (
     <Container sx={{ mt: 4 }}>
       <Typography variant="h4" align="center" gutterBottom>
-        Concentrates
+        Seeds
       </Typography>
       <Box sx={{ overflowX: "auto" }}>
         <Grid container spacing={3} sx={{ flexWrap: "nowrap" }}>
@@ -102,4 +102,4 @@ function Concentrates() {
   );
 }
 
-export default Concentrates;
+export default Seeds;

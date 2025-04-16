@@ -1,40 +1,83 @@
-import React from 'react';
-import { Box, Card, CardHeader, CardContent, Typography, Divider, Grid } from "@mui/material";
-import menuData from '../../utils/menu.json';
-const prerolls = menuData.filter((index) => index.category === 'PreRolls');
+import React from "react";
+import {
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  Divider,
+  Container
+} from "@mui/material";
+import { useQuery } from "@apollo/client";
+import { GET_MENU_BY_CATEGORY } from "../../utils/queries";
 
+function PreRolls() {
+  const { loading, error, data } = useQuery(GET_MENU_BY_CATEGORY, {
+    variables: { category: "Pre Rolls" }
+  });
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading pre-rolls.</p>;
 
-const PreRolls = () => {
+  const items = data?.menuByCategory || [];
+
   return (
-    <Box sx={{ flexGrow: 1, padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt:2 }}>
-      <Typography variant="h4" gutterBottom sx={{ fontSize:'1.9rem' }}>Pre Rolls</Typography>
-      <Divider/>
-      <Grid container spacing={3}>
-        {prerolls.map((item, index) => (
-          <Grid item md={6} xs={12} key={index}>
-            <Card 
-              sx={{
-                backgroundColor: 'rgba(255, 255, 255, 0.85)',
-                border: 0,
-                borderRadius: 5,
-                minHeight: '100px'
-              }}
-              raised= 'true'
-              >
-              <CardHeader title={item.name} />
-              <CardContent>
-                <Typography variant="body1">{item.description}</Typography>
+    <Container sx={{ mt: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        Pre Rolls
+      </Typography>
+      <Box sx={{ overflowX: "auto" }}>
+        <Grid container spacing={3} sx={{ flexWrap: "nowrap" }}>
+          {items.map((item) => (
+            <Grid item key={item._id} sx={{ minWidth: 270, maxWidth: 270 }}>
+              <Paper sx={{ p: 2, borderRadius: 3, height: "100%", opacity: 0.85 }}>
+                <Typography variant="h6" align="center">
+                  {item.name}
+                </Typography>
+                <Typography variant="subtitle2" align="center" sx={{ mb: 1 }}>
+                  {item.strain}
+                </Typography>
+
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  <Box
+                    component="img"
+                    src={item.imageUrl}
+                    alt={item.name}
+                    sx={{ width: 100, height: 100, objectFit: "cover", borderRadius: 2 }}
+                  />
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+                      maxHeight: 100,
+                      overflow: "hidden"
+                    }}
+                  >
+                    {item.effect &&
+                      item.effect.map((eff, idx) => (
+                        <Typography key={idx} variant="body2" noWrap sx={{ fontSize: 12 }}>
+                          {eff}
+                        </Typography>
+                      ))}
+                  </Box>
+                </Box>
+
                 <Divider sx={{ my: 1 }} />
-                <Typography variant="body1">{item.strain}</Typography>
-                <Divider sx={{ my: 1 }} />
-                <Typography variant="body2">{`${item.price}`}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+
+                <Box sx={{ display: "flex", flexWrap: "wrap", columnGap: 3 }}>
+                  {item.price.map((tier, idx) => (
+                    <Typography key={idx} variant="body2" sx={{ width: "33%" }}>
+                      <strong>{tier.quantity}</strong> : ${tier.amount}
+                    </Typography>
+                  ))}
+                </Box>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Container>
   );
 }
 

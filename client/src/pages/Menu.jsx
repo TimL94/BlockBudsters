@@ -7,6 +7,7 @@ import PreRolls from '../components/menu components/PreRolls';
 import Edibles from '../components/menu components/Edibles';
 import Specials from '../components/menu components/Specials';
 import Limited from '../components/menu components/Limited';
+import Seeds from '../components/menu components/Seeds';
 
 
 function linkItems() {
@@ -30,7 +31,7 @@ function linkItems() {
 function Menu() {
     return (
         <Container>
-            <Box
+            {/* <Box
                 sx={{
                     position: 'sticky',
                     top: '10px',
@@ -45,7 +46,7 @@ function Menu() {
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '85%',
+                    opacity: .9,
                     color: 'black',
                     textDecoration: 'italic',
                 }}
@@ -68,12 +69,12 @@ function Menu() {
                     mt:1,
                     mb:-2,
                     background: 'white',
-                    opacity: '50%',
+                    opacity: .9,
                     color: 'black',
                 }}
             >
                 {linkItems()}
-            </Box>
+            </Box> */}
             <Box id='concentrates'>
                 <Concentrates />
             </Box>
@@ -91,6 +92,9 @@ function Menu() {
             </Box>               
             <Box id='specials'>
                 <Specials />
+            </Box>
+            <Box id='specials'>
+                <Seeds />
             </Box>
         </Container>
     );

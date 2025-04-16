@@ -8,7 +8,10 @@ const resolvers = {
     },
     menuItems: async () => {
       return await MenuItem.find({});
-    }
+    },
+    menuByCategory: async (_, { category }) => {
+      return await MenuItem.find({ category });
+    },
   },
 
   Mutation: {
