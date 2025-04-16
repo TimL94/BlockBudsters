@@ -5,15 +5,32 @@ import {
   Paper,
   Typography,
   Divider,
-  Container
+  Container,
+  Button
 } from "@mui/material";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_MENU_BY_CATEGORY } from "../../utils/queries";
+import { DELETE_MENU_ITEM } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 function Specials() {
-  const { loading, error, data } = useQuery(GET_MENU_BY_CATEGORY, {
+  const { loading, error, data, refetch } = useQuery(GET_MENU_BY_CATEGORY, {
     variables: { category: "Special" }
   });
+
+  const [deleteMenuItem] = useMutation(DELETE_MENU_ITEM);
+
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Are you sure you want to remove this item?");
+    if (!confirm) return;
+
+    try {
+      await deleteMenuItem({ variables: { id } });
+      refetch();
+    } catch (err) {
+      console.error("Error deleting item:", err);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading specials.</p>;
@@ -26,9 +43,14 @@ function Specials() {
         Specials
       </Typography>
       <Box sx={{ overflowX: "auto" }}>
-        <Grid container spacing={3} sx={{ flexWrap: "nowrap" }}>
+        <Grid
+                container
+                spacing={3}
+                justifyContent="center"
+                sx={{ flexWrap: "nowrap" }}
+              >
           {items.map((item) => (
-            <Grid item key={item._id} sx={{ minWidth: 270, maxWidth: 270 }}>
+            <Grid item key={item._id} sx={{ minWidth: 300, maxWidth: 300 }}>
               <Paper sx={{ p: 2, borderRadius: 3, height: "100%", opacity: 0.85 }}>
                 <Typography variant="h6" align="center">
                   {item.name}
@@ -56,7 +78,12 @@ function Specials() {
                   >
                     {item.effect &&
                       item.effect.map((eff, idx) => (
-                        <Typography key={idx} variant="body2" noWrap sx={{ fontSize: 12 }}>
+                        <Typography
+                          key={idx}
+                          variant="body2"
+                          noWrap
+                          sx={{ fontSize: 12, mr: 1 }}
+                        >
                           {eff}
                         </Typography>
                       ))}
@@ -72,6 +99,18 @@ function Specials() {
                     </Typography>
                   ))}
                 </Box>
+
+                {Auth.isAdmin() && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                    onClick={() => handleDelete(item._id)}
+                    sx={{ mt: 2 }}
+                  >
+                    Remove
+                  </Button>
+                )}
               </Paper>
             </Grid>
           ))}
