@@ -32,6 +32,11 @@ input PriceInput {
 }
 
 type Query {
+    menu: [MenuItem]
+    menuByCategory(category: String!): [MenuItem]
+}
+
+type Query {
     users: [User]
     menuItems: [MenuItem]
 }

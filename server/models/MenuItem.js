@@ -10,7 +10,7 @@ const menuItemSchema = new Schema(
         },
         category: {
             type: String,
-            enum: [ 'Flower', 'Pre Rolls', 'Concentrates', 'Edibles', 'Limited', 'Special' ],
+            enum: [ 'Flower', 'Pre Rolls', 'Concentrates', 'Edibles', 'Limited', 'Special', "Seeds" ],
             required: true,
         },
         price: {

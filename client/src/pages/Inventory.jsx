@@ -15,16 +15,32 @@ import {
   OutlinedInput,
   IconButton
 } from "@mui/material";
-import { RemoveCircleOutline } from "@mui/icons-material"; // Icon import
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
 
-const categories = ["Flower", "Pre Rolls", "Concentrates", "Edibles", "Limited", "Special", "Seeds"];
+const categories = [
+  "Flower",
+  "Pre Rolls",
+  "Concentrates",
+  "Edibles",
+  "Limited",
+  "Special",
+  "Seeds"
+];
 const strains = ["Indica", "Sativa", "Hybrid"];
 const effects = [
-  "Sleep", "Energy", "Focus", "Anxiety", "Depression",
-  "Pain", "Stress", "Appetite", "Creativity", "Euphoria"
+  "Sleep",
+  "Energy",
+  "Focus",
+  "Anxiety",
+  "Depression",
+  "Pain",
+  "Stress",
+  "Appetite",
+  "Creativity",
+  "Euphoria"
 ];
 
 const buttonStyle = {
@@ -96,7 +112,7 @@ function Inventory() {
 
       const response = await fetch(uploadEndpoint, {
         method: "POST",
-        body: formData,
+        body: formData
       });
 
       if (!response.ok) {
@@ -144,10 +160,17 @@ function Inventory() {
 
       console.log("Menu item added:", data);
       alert("Menu item successfully added!");
-      window.location.reload(); // Reload the page to see the new item
+      window.location.reload();
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Error adding menu item. Check console for details.");
+      if (
+        error.message.includes("E11000") ||
+        error.message.toLowerCase().includes("duplicate key")
+      ) {
+        alert("Error: A menu item with this name already exists. Please choose a different name.");
+      } else {
+        alert("Error adding menu item. Check console for details.");
+      }
     }
   };
 
@@ -204,45 +227,26 @@ function Inventory() {
               <TextField
                 label="Quantity"
                 value={price.quantity}
-                onChange={(e) =>
-                  handlePriceChange(idx, "quantity", e.target.value)
-                }
+                onChange={(e) => handlePriceChange(idx, "quantity", e.target.value)}
                 required
               />
               <TextField
                 label="Price"
                 type="number"
                 value={price.amount}
-                onChange={(e) =>
-                  handlePriceChange(idx, "amount", e.target.value)
-                }
+                onChange={(e) => handlePriceChange(idx, "amount", e.target.value)}
                 required
               />
               {priceInput.length > 1 && (
-                <IconButton
-                  onClick={() => removePriceField(idx)}
-                  sx={{
-                    backgroundColor: 'red',
-                    borderRadius: '50%',
-                    width: 20,
-                    height: 20,
-                    color: 'black',
-                    '&:hover': {
-                      backgroundColor: '#cc0000',
-                    },
-                  }}
-                >
-                  <Typography sx={{ fontSize: '1.5rem', lineHeight: 1 }}>−</Typography>
+                <IconButton onClick={() => removePriceField(idx)}>
+                  <RemoveCircleIcon sx={{ color: "red" }} />
                 </IconButton>
-              
               )}
             </Box>
           ))}
-
           <Button variant="contained" onClick={addPriceField} sx={{ ...buttonStyle, width: "85%" }}>
             Add Price Tier
           </Button>
-
           <Box textAlign="center">
             <label htmlFor="upload-image">
               <input

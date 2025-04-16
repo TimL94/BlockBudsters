@@ -21,3 +21,36 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_MENU_ITEMS = gql`
+  query GetMenuItems {
+    menuItems {
+      _id
+      name
+      category
+      strain
+      price {
+        quantity
+        amount
+      }
+      imageUrl
+      effect
+    }
+  }
+`;
+
+export const GET_MENU_BY_CATEGORY = gql`
+  query GetMenuByCategory($category: String!) {
+    menuByCategory(category: $category) {
+      _id
+      name
+      strain
+      imageUrl
+      effect
+      price {
+        quantity
+        amount
+      }
+    }
+  }
+`;
