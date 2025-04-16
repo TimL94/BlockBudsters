@@ -38,6 +38,10 @@ const resolvers = {
       // Create a new MenuItem with the provided imageUrl and other data.
       const menuItem = await MenuItem.create({ name, category, price, strain, imageUrl, effect });
       return menuItem;
+    },
+
+    deleteMenuItem: async (parent, { id }) => {
+      return await MenuItem.findByIdAndDelete(id);
     }
   }
 };

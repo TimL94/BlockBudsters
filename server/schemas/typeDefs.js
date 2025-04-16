@@ -61,6 +61,8 @@ type Mutation {
         imageUrl: String!,
         effect: [String]
     ): MenuItem
+
+    deleteMenuItem(id: ID!): MenuItem
 }
 `;
 
