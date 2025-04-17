@@ -7,10 +7,12 @@ import {
   TextField,
   Button,
   Box,
-  Divider
+  Divider,
+  IconButton
 } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_MENU_BY_CATEGORY } from "../utils/queries";
+import CloseIcon from "@mui/icons-material/Close";
 
 const categories = [
   "Flower",
@@ -58,26 +60,30 @@ function Order() {
     setItemQuantity(1);
   };
 
+  const handleRemoveItem = (index) => {
+    setOrderSummary((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const handleSubmitOrder = async () => {
+    const confirmation = window.confirm(
+      "By confirming this order I, the customer, am stating that I have a valid medical marijuana license and am agreeing to produce my valid card at the time of purchase."
+    );
+    if (!confirmation) return;
+
     const total = orderSummary.reduce(
       (sum, item) => sum + item.amount * item.quantity,
       0
     );
 
-    const message = `
-New Order from ${customerName}
-Phone: ${customerPhone}
+    const now = new Date();
+    const timestamp = now.toLocaleString();
 
-Items:
-${orderSummary
-  .map(
-    (item) =>
-      `${item.quantity}x ${item.item} (${item.tier}) - $${item.amount * item.quantity}`
-  )
-  .join("\n")}
-
-Total: $${total.toFixed(2)}
-    `;
+    const message = `Order from:\n${customerName} - ${customerPhone}\n--------------------\n\nTime:\n${timestamp}\n--------------------\nItems:\n${orderSummary
+      .map(
+        (item) =>
+          `${item.quantity}x ${item.item} (${item.tier}) - $${item.amount * item.quantity}`
+      )
+      .join("\n")}\n--------------------\n\nOrder Total:\n$${total.toFixed(2)}`;
 
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -97,11 +103,11 @@ Total: $${total.toFixed(2)}
         throw new Error("Email send failed");
       }
 
-      const result = await response.json();
-      console.log("Email sent:", result);
-      alert("Order placed successfully!");
+      await response.json();
+      alert(
+        "Thank you for placing your order with Block Budsters Medical Marijuana! A store employee will reach out to you shortly through the phone number you provided. Standard rates will apply."
+      );
 
-      // Reset form
       setSelectedCategory("");
       setSelectedItemId("");
       setSelectedTier("");
@@ -122,6 +128,11 @@ Total: $${total.toFixed(2)}
       setSelectedTier("");
     }
   }, [selectedCategory, refetch]);
+
+  const handlePhoneInput = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setCustomerPhone(value);
+  };
 
   return (
     <Container sx={{ mt: 4 }}>
@@ -211,13 +222,25 @@ Total: $${total.toFixed(2)}
         ) : (
           <Box>
             {orderSummary.map((item, idx) => (
-              <Typography key={idx}>
-                {item.quantity}x {item.item} ({item.tier}) - ${item.amount * item.quantity}
-              </Typography>
+              <Box key={idx} sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <Typography>
+                  {item.quantity}x {item.item} ({item.tier}) - ${item.amount * item.quantity}
+                </Typography>
+                <IconButton
+                  color="error"
+                  size="small"
+                  onClick={() => handleRemoveItem(idx)}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Box>
             ))}
             <Divider sx={{ my: 1 }} />
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-              Total: ${orderSummary.reduce((sum, item) => sum + item.amount * item.quantity, 0).toFixed(2)}
+              Total: $
+              {orderSummary
+                .reduce((sum, item) => sum + item.amount * item.quantity, 0)
+                .toFixed(2)}
             </Typography>
           </Box>
         )}
@@ -236,7 +259,7 @@ Total: $${total.toFixed(2)}
           fullWidth
           label="Phone Number"
           value={customerPhone}
-          onChange={(e) => setCustomerPhone(e.target.value)}
+          onChange={handlePhoneInput}
           sx={{ mb: 2 }}
         />
 
@@ -244,9 +267,7 @@ Total: $${total.toFixed(2)}
           variant="contained"
           fullWidth
           onClick={handleSubmitOrder}
-          disabled={
-            !customerName || !customerPhone || orderSummary.length === 0
-          }
+          disabled={!customerName || !customerPhone || orderSummary.length === 0}
         >
           Submit Order
         </Button>
