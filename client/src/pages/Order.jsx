@@ -87,6 +87,7 @@ function Order() {
 
     const now = new Date();
     const timestamp = now.toLocaleString();
+    const subject = `New Order from BlockBudsters at ${timestamp}`;
 
     const message = `Order from:\n${customerName} - ${customerPhone}\n--------------------\n\nTime:\n${timestamp}\n--------------------\nItems:\n${orderSummary
       .map(
@@ -104,7 +105,7 @@ function Order() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          subject: "New Order from BlockBudsters",
+          subject,
           text: message
         })
       });
