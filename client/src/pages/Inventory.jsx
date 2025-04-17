@@ -12,10 +12,8 @@ import {
   FormControl,
   Checkbox,
   ListItemText,
-  OutlinedInput,
-  IconButton
+  OutlinedInput
 } from "@mui/material";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useMutation } from "@apollo/client";
 import { ADD_MENU_ITEM } from "../utils/mutations";
 import heic2any from "heic2any";
@@ -26,8 +24,7 @@ const categories = [
   "Concentrates",
   "Edibles",
   "Limited",
-  "Special",
-  "Seeds"
+  "Special"
 ];
 const strains = ["Indica", "Sativa", "Hybrid"];
 const effects = [
@@ -50,6 +47,23 @@ const buttonStyle = {
   backgroundColor: "#006400",
   "&:hover": {
     backgroundColor: "#004d00"
+  }
+};
+
+const textFieldGreenBorder = {
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#006400"
+    },
+    "&:hover fieldset": {
+      borderColor: "#004d00"
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#004d00"
+    }
+  },
+  "& label.Mui-focused": {
+    color: "#004d00"
   }
 };
 
@@ -163,14 +177,7 @@ function Inventory() {
       window.location.reload();
     } catch (error) {
       console.error("Upload error:", error);
-      if (
-        error.message.includes("E11000") ||
-        error.message.toLowerCase().includes("duplicate key")
-      ) {
-        alert("Error: A menu item with this name already exists. Please choose a different name.");
-      } else {
-        alert("Error adding menu item. Check console for details.");
-      }
+      alert("Error adding menu item. Check console for details.");
     }
   };
 
@@ -186,15 +193,29 @@ function Inventory() {
           encType="multipart/form-data"
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
-          <TextField name="name" label="Name" required />
-          <TextField name="category" label="Category" required select defaultValue="">
+          <TextField name="name" label="Name" required sx={textFieldGreenBorder} />
+          <TextField
+            name="category"
+            label="Category"
+            required
+            select
+            defaultValue=""
+            sx={textFieldGreenBorder}
+          >
             {categories.map((cat) => (
               <MuiMenuItem key={cat} value={cat}>
                 {cat}
               </MuiMenuItem>
             ))}
           </TextField>
-          <TextField name="strain" label="Strain" required select defaultValue="">
+          <TextField
+            name="strain"
+            label="Strain"
+            required
+            select
+            defaultValue=""
+            sx={textFieldGreenBorder}
+          >
             {strains.map((s) => (
               <MuiMenuItem key={s} value={s}>
                 {s}
@@ -202,7 +223,7 @@ function Inventory() {
             ))}
           </TextField>
 
-          <FormControl>
+          <FormControl sx={textFieldGreenBorder}>
             <InputLabel id="effect-label">Effects</InputLabel>
             <Select
               labelId="effect-label"
@@ -229,6 +250,7 @@ function Inventory() {
                 value={price.quantity}
                 onChange={(e) => handlePriceChange(idx, "quantity", e.target.value)}
                 required
+                sx={textFieldGreenBorder}
               />
               <TextField
                 label="Price"
@@ -236,11 +258,12 @@ function Inventory() {
                 value={price.amount}
                 onChange={(e) => handlePriceChange(idx, "amount", e.target.value)}
                 required
+                sx={textFieldGreenBorder}
               />
               {priceInput.length > 1 && (
-                <IconButton onClick={() => removePriceField(idx)}>
-                  <RemoveCircleIcon sx={{ color: "red" }} />
-                </IconButton>
+                <Button onClick={() => removePriceField(idx)} color="error">
+                  &#x2716;
+                </Button>
               )}
             </Box>
           ))}

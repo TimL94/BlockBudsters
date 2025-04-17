@@ -24,6 +24,16 @@ const categories = [
   "Seeds"
 ];
 
+const fieldSx = {
+  mb: 2,
+  "& label.Mui-focused": { color: "#006400" },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": { borderColor: "#006400" },
+    "&:hover fieldset": { borderColor: "#004d00" },
+    "&.Mui-focused fieldset": { borderColor: "#006400" }
+  }
+};
+
 function Order() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedItemId, setSelectedItemId] = useState("");
@@ -147,7 +157,7 @@ function Order() {
           label="Category"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          sx={{ mb: 2 }}
+          sx={fieldSx}
         >
           {categories.map((cat) => (
             <MenuItem key={cat} value={cat}>
@@ -161,10 +171,10 @@ function Order() {
             <TextField
               select
               fullWidth
-              label="Menu Item"
+              label="Product"
               value={selectedItemId}
               onChange={(e) => setSelectedItemId(e.target.value)}
-              sx={{ mb: 2 }}
+              sx={fieldSx}
             >
               {menuItems.map((item) => (
                 <MenuItem key={item._id} value={item._id}>
@@ -178,10 +188,10 @@ function Order() {
                 <TextField
                   select
                   fullWidth
-                  label="Quantity Tier"
+                  label="Amount"
                   value={selectedTier}
                   onChange={(e) => setSelectedTier(e.target.value)}
-                  sx={{ mb: 2 }}
+                  sx={fieldSx}
                 >
                   {selectedItem.price.map((p, idx) => (
                     <MenuItem key={idx} value={p.quantity}>
@@ -196,14 +206,21 @@ function Order() {
                   label="How many?"
                   value={itemQuantity}
                   onChange={(e) => setItemQuantity(Number(e.target.value))}
-                  sx={{ mb: 2 }}
+                  sx={fieldSx}
                 />
 
                 <Button
                   variant="contained"
                   fullWidth
                   onClick={handleAddToOrder}
-                  sx={{ mb: 2 }}
+                  sx={{
+                    mb: 2,
+                    borderRadius: 5,
+                    backgroundColor: "#006400",
+                    "&:hover": {
+                      backgroundColor: "#004d00"
+                    }
+                  }}
                 >
                   Add to Order
                 </Button>
@@ -252,7 +269,7 @@ function Order() {
           label="Your Name"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
-          sx={{ mb: 2 }}
+          sx={fieldSx}
         />
 
         <TextField
@@ -260,7 +277,7 @@ function Order() {
           label="Phone Number"
           value={customerPhone}
           onChange={handlePhoneInput}
-          sx={{ mb: 2 }}
+          sx={fieldSx}
         />
 
         <Button
@@ -268,6 +285,14 @@ function Order() {
           fullWidth
           onClick={handleSubmitOrder}
           disabled={!customerName || !customerPhone || orderSummary.length === 0}
+          sx={{
+            mt: 1,
+            borderRadius: 5,
+            backgroundColor: "#006400",
+            "&:hover": {
+              backgroundColor: "#004d00"
+            }
+          }}
         >
           Submit Order
         </Button>
