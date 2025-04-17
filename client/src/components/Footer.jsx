@@ -44,29 +44,29 @@ const textStyles = { fontSize: '0.6rem', fontWeight: 300, py: 0.5 };
                         <Grid item>
                             <List sx={{ p: 0 }}>
                                 <ListItem sx={textStyles}>
-                                    Sunday: 11:00am-10:00pm
+                                    Sunday: TBD
                                 </ListItem>
                                 <ListItem sx={textStyles}>
-                                    Monday: Closed
+                                    Monday: TBD
                                 </ListItem>
                                 <ListItem sx={textStyles}>
-                                    Tuesday: 11:00am-10:00pm
+                                    Tuesday: TBD
                                 </ListItem>
                                 <ListItem sx={textStyles}>
-                                    Wednesday: 11:00am-10:00pm
+                                    Wednesday: TBD
                                 </ListItem>
                             </List>
                         </Grid>
                         <Grid item>
                             <List sx={{ p: 0 }}>
                                 <ListItem sx={textStyles}>
-                                    Thursday: 11:00am-10:00pm
+                                    Thursday: TBD
                                 </ListItem>
                                 <ListItem sx={textStyles}>
-                                    Friday: 11:00am-11:00pm
+                                    Friday: TBD
                                 </ListItem>
                                 <ListItem sx={textStyles}>
-                                    Saturday: 11:00am-11:00pm
+                                    Saturday: TBD
                                 </ListItem>
                             </List>
                         </Grid>
