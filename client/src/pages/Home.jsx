@@ -44,18 +44,7 @@ function Home() {
                             }} 
                                 >New Customer?
                     </Divider>
-                    <Typography 
-                        variant="body1" 
-                        sx={{ m: 3 }}
-                        >
-                            Create a new account 
-                            <Link 
-                                to='/NewUser' 
-                                style={{ textDecoration: 'underline'}}
-                                >
-                                    Here!
-                            </Link>
-                    </Typography>
+                    <Typography variant="body1" sx={{ m: 3 }}>Create a new account <Link to='/NewUser' style={{ textDecoration: 'underline'}}>Here!</Link></Typography>
                     <Divider sx={{ 
                                 fontStyle:'italic', 
                                 "&::before, &::after": {
