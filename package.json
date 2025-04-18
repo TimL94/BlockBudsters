@@ -1,7 +1,7 @@
 {
-  "name": "job-cred",
+  "name": "Block Budsters",
   "version": "1.0.0",
-  "description": "A web application designed to connect employees with employers to help build job experience and for people looking for a career change",
+  "description": "a MERN web application for the medical dispensary Block Budsters",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
