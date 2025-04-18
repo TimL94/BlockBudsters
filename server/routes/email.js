@@ -1,43 +1,44 @@
+// server/routes/email.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const dotenv = require('dotenv');
 dotenv.config();
 
-const EMAIL_USER = process.env.EMAIL_USER;
-const APP_PASSWORD = process.env.APP_PASSWORD;
 const STORE_EMAIL = process.env.STORE_EMAIL;
-
-// Helper function to format phone numbers to 000-000-0000
-const formatPhone = (phone) => {
-  const cleaned = ('' + phone).replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-  return match ? `${match[1]}-${match[2]}-${match[3]}` : phone;
-};
+const APP_PASSWORD = process.env.APP_PASSWORD;
+const EMAIL_USER = process.env.EMAIL_USER;
 
 router.post('/send-email', async (req, res) => {
-  const { to = STORE_EMAIL, subject, text, customerPhone } = req.body;
-
-  // Format phone number if provided
-  const formattedText = customerPhone
-    ? text.replace(customerPhone, formatPhone(customerPhone))
-    : text;
+  const { subject, text, customerEmail } = req.body;
+  console.log('Received email request:', { subject, text, customerEmail });
 
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: EMAIL_USER,
-        pass: APP_PASSWORD,
-      },
+        pass: APP_PASSWORD
+      }
     });
 
+    // Send to store
     await transporter.sendMail({
       from: `"BlockBudsters Orders" <${EMAIL_USER}>`,
-      to,
+      to: STORE_EMAIL,
       subject,
-      text: formattedText,
+      text
     });
+
+    // Send to customer (if available)
+    if (customerEmail) {
+      await transporter.sendMail({
+        from: `"BlockBudsters Orders" <${EMAIL_USER}>`,
+        to: customerEmail,
+        subject,
+        text
+      });
+    }
 
     res.json({ success: true });
   } catch (err) {
