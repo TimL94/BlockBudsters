@@ -1,15 +1,17 @@
+// server/routes/email.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const dotenv = require('dotenv');
 dotenv.config();
 
-const EMAIL_USER = process.env.EMAIL_USER;
-const APP_PASSWORD = process.env.APP_PASSWORD;
 const STORE_EMAIL = process.env.STORE_EMAIL;
+const APP_PASSWORD = process.env.APP_PASSWORD;
+const EMAIL_USER = process.env.EMAIL_USER;
 
 router.post('/send-email', async (req, res) => {
-  const { to = STORE_EMAIL, subject, text } = req.body;
+  const { subject, text, customerEmail } = req.body;
+  console.log('Received email request:', { subject, text, customerEmail });
 
   try {
     const transporter = nodemailer.createTransport({
@@ -20,12 +22,23 @@ router.post('/send-email', async (req, res) => {
       }
     });
 
+    // Send to store
     await transporter.sendMail({
-      from: `"BlockBudsters Ordering" <${EMAIL_USER}>`,
-      to,
+      from: `"BlockBudsters Orders" <${EMAIL_USER}>`,
+      to: STORE_EMAIL,
       subject,
       text
     });
+
+    // Send to customer (if available)
+    if (customerEmail) {
+      await transporter.sendMail({
+        from: `"BlockBudsters Orders" <${EMAIL_USER}>`,
+        to: customerEmail,
+        subject,
+        text
+      });
+    }
 
     res.json({ success: true });
   } catch (err) {

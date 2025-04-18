@@ -13,6 +13,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { GET_MENU_BY_CATEGORY } from "../utils/queries";
 import CloseIcon from "@mui/icons-material/Close";
+import Auth from "../utils/auth";
 
 const categories = [
   "Flower",
@@ -42,6 +43,7 @@ function Order() {
   const [orderSummary, setOrderSummary] = useState([]);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const { data, refetch } = useQuery(GET_MENU_BY_CATEGORY, {
     variables: { category: selectedCategory },
@@ -54,17 +56,16 @@ function Order() {
 
   const handleAddToOrder = () => {
     if (!selectedItem || !selectedTier || !itemQuantity) return;
-
     setOrderSummary((prev) => [
       ...prev,
       {
         item: selectedItem.name,
         tier: selectedTier,
         quantity: itemQuantity,
-        amount: selectedPrice.amount
+        amount: selectedPrice.amount,
+        category: selectedCategory
       }
     ]);
-
     setSelectedItemId("");
     setSelectedTier("");
     setItemQuantity(1);
@@ -75,28 +76,37 @@ function Order() {
   };
 
   const handleSubmitOrder = async () => {
+    if (customerPhone.length !== 10) {
+      setPhoneError("Phone number must be 10 digits.");
+      return;
+    }
+
     const confirmation = window.confirm(
       "By confirming this order I, the customer, am stating that I have a valid medical marijuana license and am agreeing to produce my valid card at the time of purchase."
     );
     if (!confirmation) return;
 
-    const total = orderSummary.reduce(
-      (sum, item) => sum + item.amount * item.quantity,
-      0
-    );
+    const subtotal = orderSummary.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+    const totalTax = orderSummary.reduce((sum, item) => {
+      const taxRate = item.category === "Edibles" ? 0.08 : 0.05;
+      return sum + item.amount * item.quantity * taxRate;
+    }, 0);
+    const total = subtotal + totalTax;
 
     const now = new Date();
     const timestamp = now.toLocaleString();
+    const formattedPhone = `${customerPhone.slice(0, 3)}-${customerPhone.slice(3, 6)}-${customerPhone.slice(6)}`;
     const subject = `New Order from BlockBudsters at ${timestamp}`;
-
-    const message = `Order from:\n${customerName} - ${customerPhone}\n--------------------\n\nTime:\n${timestamp}\n--------------------\nItems:\n${orderSummary
+    const message = `Order from:\n${customerName} - ${formattedPhone}\n--------------------\n\nTime:\n${timestamp}\n--------------------\nItems:\n${orderSummary
       .map(
         (item) =>
-          `${item.quantity}x ${item.item} (${item.tier}) - $${item.amount * item.quantity}`
+          `${item.quantity}x ${item.item} (${item.tier}) - $${(item.amount * item.quantity).toFixed(2)}`
       )
-      .join("\n")}\n--------------------\n\nOrder Total:\n$${total.toFixed(2)}`;
+      .join("\n")}\n--------------------\n\nSubtotal:\n$${subtotal.toFixed(2)}\nTax:\n$${totalTax.toFixed(2)}\n\nOrder Total:\n$${total.toFixed(2)}`;
 
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+    const customerEmail = Auth.getProfile().data.email;
+    console.log("Customer email:", customerEmail);
 
     try {
       const response = await fetch(`${apiUrl}/api/email/send-email`, {
@@ -106,18 +116,14 @@ function Order() {
         },
         body: JSON.stringify({
           subject,
-          text: message
+          text: message,
+          customerEmail
         })
       });
 
-      if (!response.ok) {
-        throw new Error("Email send failed");
-      }
-
+      if (!response.ok) throw new Error("Email send failed");
       await response.json();
-      alert(
-        "Thank you for placing your order with Block Budsters Medical Marijuana! A store employee will reach out to you shortly through the phone number you provided. Standard rates will apply."
-      );
+      alert("Thank you for placing your order with Block Budsters Medical Marijuana! A store employee will reach out to you shortly through the phone number you provided, and an email has ben sent to the email associated with your account. Standard rates will apply.");
 
       setSelectedCategory("");
       setSelectedItemId("");
@@ -126,6 +132,7 @@ function Order() {
       setOrderSummary([]);
       setCustomerName("");
       setCustomerPhone("");
+      setPhoneError("");
     } catch (error) {
       console.error("Error sending email:", error);
       alert("Failed to send order. Please try again.");
@@ -143,86 +150,41 @@ function Order() {
   const handlePhoneInput = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     setCustomerPhone(value);
+    if (value.length !== 10) {
+      setPhoneError("Phone number must be 10 digits.");
+    } else {
+      setPhoneError("");
+    }
   };
 
   return (
     <Container sx={{ mt: 4 }}>
       <Paper sx={{ p: 4, borderRadius: 3, opacity: 0.85 }}>
-        <Typography variant="h4" gutterBottom>
-          Place Your Order
-        </Typography>
+        <Typography variant="h4" gutterBottom>Place Your Order</Typography>
 
-        <TextField
-          select
-          fullWidth
-          label="Category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          sx={fieldSx}
-        >
+        <TextField select fullWidth label="Category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} sx={fieldSx}>
           {categories.map((cat) => (
-            <MenuItem key={cat} value={cat}>
-              {cat}
-            </MenuItem>
+            <MenuItem key={cat} value={cat}>{cat}</MenuItem>
           ))}
         </TextField>
 
         {selectedCategory && (
           <>
-            <TextField
-              select
-              fullWidth
-              label="Product"
-              value={selectedItemId}
-              onChange={(e) => setSelectedItemId(e.target.value)}
-              sx={fieldSx}
-            >
+            <TextField select fullWidth label="Product" value={selectedItemId} onChange={(e) => setSelectedItemId(e.target.value)} sx={fieldSx}>
               {menuItems.map((item) => (
-                <MenuItem key={item._id} value={item._id}>
-                  {item.name}
-                </MenuItem>
+                <MenuItem key={item._id} value={item._id}>{item.name}</MenuItem>
               ))}
             </TextField>
 
             {selectedItem && (
               <>
-                <TextField
-                  select
-                  fullWidth
-                  label="Amount"
-                  value={selectedTier}
-                  onChange={(e) => setSelectedTier(e.target.value)}
-                  sx={fieldSx}
-                >
+                <TextField select fullWidth label="Amount" value={selectedTier} onChange={(e) => setSelectedTier(e.target.value)} sx={fieldSx}>
                   {selectedItem.price.map((p, idx) => (
-                    <MenuItem key={idx} value={p.quantity}>
-                      {p.quantity} - ${p.amount}
-                    </MenuItem>
+                    <MenuItem key={idx} value={p.quantity}>{p.quantity} - ${p.amount}</MenuItem>
                   ))}
                 </TextField>
-
-                <TextField
-                  type="number"
-                  fullWidth
-                  label="How many?"
-                  value={itemQuantity}
-                  onChange={(e) => setItemQuantity(Number(e.target.value))}
-                  sx={fieldSx}
-                />
-
-                <Button
-                  variant="contained"
-                  fullWidth
-                  onClick={handleAddToOrder}
-                  sx={{
-                    mb: 2,
-                    borderRadius: 5,
-                    backgroundColor: "#006400",
-                    "&:hover": {
-                      backgroundColor: "#004d00"
-                    }
-                  }}
-                >
+                <TextField type="number" fullWidth label="How many?" value={itemQuantity} onChange={(e) => setItemQuantity(Number(e.target.value))} sx={fieldSx} />
+                <Button variant="contained" fullWidth onClick={handleAddToOrder} sx={{ mb: 2, backgroundColor: "#006400", '&:hover': { backgroundColor: "#004d00" } }}>
                   Add to Order
                 </Button>
               </>
@@ -232,69 +194,32 @@ function Order() {
 
         <Divider sx={{ my: 3 }} />
 
-        <Typography variant="h6" sx={{ mt: 2 }}>
-          Order Summary
-        </Typography>
+        <Typography variant="h6" sx={{ mt: 2 }}>Order Summary</Typography>
         {orderSummary.length === 0 ? (
           <Typography>No items added yet.</Typography>
         ) : (
           <Box>
             {orderSummary.map((item, idx) => (
               <Box key={idx} sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography>
-                  {item.quantity}x {item.item} ({item.tier}) - ${item.amount * item.quantity}
-                </Typography>
-                <IconButton
-                  color="error"
-                  size="small"
-                  onClick={() => handleRemoveItem(idx)}
-                >
-                  <CloseIcon />
-                </IconButton>
+                <Typography>{item.quantity}x {item.item} ({item.tier}) - ${item.amount * item.quantity}</Typography>
+                <IconButton color="error" size="small" onClick={() => handleRemoveItem(idx)}><CloseIcon /></IconButton>
               </Box>
             ))}
             <Divider sx={{ my: 1 }} />
+            <Typography variant="body2">Subtotal: ${orderSummary.reduce((sum, item) => sum + item.amount * item.quantity, 0).toFixed(2)}</Typography>
+            <Typography variant="body2">Tax: ${orderSummary.reduce((sum, item) => sum + item.amount * item.quantity * (item.category === "Edibles" ? 0.08 : 0.05), 0).toFixed(2)}</Typography>
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-              Total: $
-              {orderSummary
-                .reduce((sum, item) => sum + item.amount * item.quantity, 0)
-                .toFixed(2)}
+              Total: ${orderSummary.reduce((sum, item) => sum + item.amount * item.quantity * (item.category === "Edibles" ? 1.08 : 1.05), 0).toFixed(2)}
             </Typography>
           </Box>
         )}
 
         <Divider sx={{ my: 3 }} />
 
-        <TextField
-          fullWidth
-          label="Your Name"
-          value={customerName}
-          onChange={(e) => setCustomerName(e.target.value)}
-          sx={fieldSx}
-        />
+        <TextField fullWidth label="Your Name" value={customerName} onChange={(e) => setCustomerName(e.target.value)} sx={fieldSx} />
+        <TextField fullWidth label="Phone Number" value={customerPhone} onChange={handlePhoneInput} sx={fieldSx} error={!!phoneError} helperText={phoneError} />
 
-        <TextField
-          fullWidth
-          label="Phone Number"
-          value={customerPhone}
-          onChange={handlePhoneInput}
-          sx={fieldSx}
-        />
-
-        <Button
-          variant="contained"
-          fullWidth
-          onClick={handleSubmitOrder}
-          disabled={!customerName || !customerPhone || orderSummary.length === 0}
-          sx={{
-            mt: 1,
-            borderRadius: 5,
-            backgroundColor: "#006400",
-            "&:hover": {
-              backgroundColor: "#004d00"
-            }
-          }}
-        >
+        <Button variant="contained" fullWidth onClick={handleSubmitOrder} disabled={!customerName || !customerPhone || orderSummary.length === 0 || phoneError} sx={{ mt: 1, backgroundColor: "#006400", '&:hover': { backgroundColor: "#004d00" } }}>
           Submit Order
         </Button>
       </Paper>
